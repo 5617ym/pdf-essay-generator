@@ -21,20 +21,67 @@
       display:flex;
       align-items:center;
       justify-content:center;
-      background:
-        radial-gradient(circle at top left, rgba(0,198,255,0.22), transparent 30%),
-        radial-gradient(circle at bottom right, rgba(124,58,237,0.20), transparent 30%),
-        linear-gradient(135deg, #0f172a 0%, #111827 45%, #1e293b 100%);
       padding:24px;
+      overflow:hidden;
       color:#0f172a;
+      background:
+        radial-gradient(circle at top left, rgba(0,198,255,0.18), transparent 28%),
+        radial-gradient(circle at bottom right, rgba(124,58,237,0.18), transparent 28%),
+        linear-gradient(135deg, #07111f 0%, #0b1730 45%, #141b42 100%);
+      position:relative;
+    }
+
+    .math-background{
+      position:fixed;
+      inset:0;
+      z-index:0;
+      pointer-events:none;
+      overflow:hidden;
+    }
+
+    .math-symbol{
+      position:absolute;
+      color:rgba(255,255,255,0.08);
+      font-size:14px;
+      font-weight:700;
+      user-select:none;
+      animation:floatMath linear infinite;
+      text-shadow:0 0 8px rgba(59,130,246,0.08);
+    }
+
+    .math-symbol.alt{
+      color:rgba(125,211,252,0.09);
+    }
+
+    .math-symbol.soft{
+      color:rgba(196,181,253,0.08);
+    }
+
+    @keyframes floatMath{
+      0%{
+        transform:translateY(110vh) rotate(0deg);
+        opacity:0;
+      }
+      15%{
+        opacity:1;
+      }
+      85%{
+        opacity:1;
+      }
+      100%{
+        transform:translateY(-15vh) rotate(18deg);
+        opacity:0;
+      }
     }
 
     .card{
+      position:relative;
+      z-index:2;
       width:100%;
       max-width:560px;
-      background:rgba(255,255,255,0.94);
+      background:rgba(18,18,20,0.92);
       backdrop-filter:blur(14px);
-      border:1px solid rgba(255,255,255,0.35);
+      border:1px solid rgba(255,255,255,0.06);
       border-radius:28px;
       padding:34px 28px;
       box-shadow:0 20px 60px rgba(0,0,0,0.28);
@@ -44,7 +91,7 @@
       font-size:36px;
       font-weight:800;
       margin:0 0 8px;
-      color:#111827;
+      color:#f5efe6;
       text-align:center;
     }
 
@@ -52,7 +99,7 @@
       font-size:26px;
       font-weight:500;
       margin:0 0 28px;
-      color:#64748b;
+      color:#c7b9a7;
       text-align:center;
     }
 
@@ -64,7 +111,7 @@
       display:block;
       font-size:15px;
       font-weight:700;
-      color:#334155;
+      color:#f2e7d8;
       margin-bottom:8px;
     }
 
@@ -72,62 +119,64 @@
       width:100%;
       padding:14px 16px;
       border-radius:16px;
-      border:1px solid #dbeafe;
-      background:#f8fafc;
+      border:1px solid #0b5cd6;
+      background:rgba(18,20,26,0.6);
       font-size:16px;
       font-family:'Tajawal',sans-serif;
       outline:none;
       transition:0.2s ease;
-      color:#0f172a;
+      color:#f5efe6;
     }
 
     select:focus{
       border-color:#38bdf8;
-      box-shadow:0 0 0 4px rgba(56,189,248,0.16);
-      background:#fff;
+      box-shadow:0 0 0 4px rgba(56,189,248,0.12);
+      background:rgba(18,20,26,0.85);
     }
 
     .drop-zone{
-      border:2px dashed #3b82f6;
+      border:2px dashed #0b6cf0;
       border-radius:20px;
       padding:28px 18px;
       text-align:center;
       cursor:pointer;
-      background:#f8fafc;
-      transition:0.2s ease;
+      background:rgba(18,20,26,0.50);
+      transition:0.25s ease;
       position:relative;
       overflow:hidden;
     }
 
     .drop-zone:hover{
-      background:#eef6ff;
-      border-color:#2563eb;
+      background:rgba(21,28,42,0.78);
+      border-color:#2ea9ff;
+      box-shadow:0 0 25px rgba(28,105,255,0.10);
     }
 
     .drop-zone.dragover{
-      background:#eef6ff;
-      border-color:#2563eb;
+      background:rgba(21,28,42,0.92);
+      border-color:#38bdf8;
       transform:scale(1.01);
+      box-shadow:0 0 30px rgba(56,189,248,0.15);
     }
 
     .drop-zone p{
       margin:0 0 8px;
       font-weight:800;
       font-size:18px;
-      color:#0f172a;
+      color:#f5efe6;
     }
 
     .drop-zone span{
       display:block;
       font-size:14px;
-      color:#64748b;
+      color:#c7b9a7;
       margin-bottom:12px;
     }
 
     .file-name{
       margin-top:10px;
       font-size:14px;
-      color:#2563eb;
+      color:#57b9ff;
       font-weight:700;
       word-break:break-word;
     }
@@ -142,7 +191,7 @@
       font-family:'Tajawal',sans-serif;
       cursor:pointer;
       color:#fff;
-      background:linear-gradient(135deg,#06b6d4 0%, #2563eb 55%, #7c3aed 100%);
+      background:linear-gradient(135deg,#18b7df 0%, #2e67f0 55%, #5320d6 100%);
       box-shadow:0 14px 30px rgba(37,99,235,0.28);
       transition:transform 0.18s ease, box-shadow 0.18s ease, opacity 0.18s ease;
     }
@@ -156,7 +205,7 @@
       margin-top:14px;
       text-align:center;
       font-size:14px;
-      color:#64748b;
+      color:#b8ab97;
     }
 
     @media (max-width:640px){
@@ -176,6 +225,8 @@
   </style>
 </head>
 <body>
+
+  <div class="math-background" id="mathBackground"></div>
 
   <div class="card">
     <p class="welcome">ارحب مشعل</p>
@@ -253,6 +304,40 @@
         fileName.textContent = e.dataTransfer.files[0].name;
       }
     });
+
+    const mathBackground = document.getElementById("mathBackground");
+    const symbols = [
+      "+","-","×","÷","=","≠","≈","√","∑","∫","π","∞","∆","∂","θ","λ",
+      "x²","y²","a+b","dy/dx","f(x)","( )","[ ]","{ }","µ","σ","cos","sin"
+    ];
+
+    function createMathSymbol() {
+      const symbol = document.createElement("span");
+      symbol.className = "math-symbol";
+
+      const styleRand = Math.random();
+      if (styleRand > 0.66) symbol.classList.add("alt");
+      else if (styleRand > 0.33) symbol.classList.add("soft");
+
+      symbol.textContent = symbols[Math.floor(Math.random() * symbols.length)];
+      symbol.style.left = Math.random() * 100 + "vw";
+      symbol.style.top = (100 + Math.random() * 10) + "vh";
+      symbol.style.fontSize = (11 + Math.random() * 16) + "px";
+      symbol.style.animationDuration = (14 + Math.random() * 16) + "s";
+      symbol.style.animationDelay = (Math.random() * 2) + "s";
+
+      mathBackground.appendChild(symbol);
+
+      setTimeout(() => {
+        symbol.remove();
+      }, 32000);
+    }
+
+    for (let i = 0; i < 28; i++) {
+      setTimeout(createMathSymbol, i * 250);
+    }
+
+    setInterval(createMathSymbol, 700);
   </script>
 
 </body>
