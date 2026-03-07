@@ -39,7 +39,6 @@
       opacity:1;
     }
 
-    /* ضجيج خفيف */
     .bg-noise{
       position:absolute;
       inset:0;
@@ -53,7 +52,6 @@
       opacity:0.55;
     }
 
-    /* شبكة dashboard */
     .data-grid{
       position:absolute;
       inset:0;
@@ -72,7 +70,6 @@
       opacity:0.22;
     }
 
-    /* معادلات صغيرة كثيرة */
     .eq{
       position:absolute;
       color:rgba(255,255,255,0.10);
@@ -91,7 +88,6 @@
     .eq-mid{ color:rgba(255,255,255,0.10); }
     .eq-strong{ color:rgba(255,255,255,0.14); }
 
-    /* عناصر dashboard خفيفة */
     .panel-line{
       position:absolute;
       border:1px solid rgba(47, 86, 150, 0.10);
@@ -122,31 +118,48 @@
       height:100%;
     }
 
-    /* النجوم المضيئة */
     .data-star{
       position:absolute;
       border-radius:50%;
-      background:#7dd3fc;
+      background:#b9ecff;
       box-shadow:
-        0 0 4px rgba(125,211,252,0.55),
-        0 0 8px rgba(56,189,248,0.38),
-        0 0 14px rgba(37,99,235,0.24);
-      opacity:0.9;
-      animation:starPulse ease-in-out infinite;
+        0 0 6px rgba(185,236,255,0.95),
+        0 0 12px rgba(125,211,252,0.85),
+        0 0 22px rgba(56,189,248,0.55),
+        0 0 34px rgba(37,99,235,0.30);
+      opacity:1;
+      animation:starPulse 2.2s ease-in-out infinite, starDrift 8s linear infinite;
     }
 
     @keyframes starPulse{
       0%,100%{
-        transform:scale(0.8);
-        opacity:0.45;
+        transform:scale(0.9);
+        opacity:0.55;
       }
       50%{
-        transform:scale(1.35);
+        transform:scale(1.8);
         opacity:1;
       }
     }
 
-    /* رموز صغيرة متحركة */
+    @keyframes starDrift{
+      0%{
+        transform:translateY(0) translateX(0);
+      }
+      25%{
+        transform:translateY(-6px) translateX(4px);
+      }
+      50%{
+        transform:translateY(-10px) translateX(-3px);
+      }
+      75%{
+        transform:translateY(-4px) translateX(5px);
+      }
+      100%{
+        transform:translateY(0) translateX(0);
+      }
+    }
+
     .float-symbol{
       position:absolute;
       color:rgba(255,255,255,0.08);
@@ -513,7 +526,8 @@
       const variantChance = Math.random();
 
       if (glowChance) {
-        el.className = "eq eq-glow";
+        el.className = "eq eq-strong";
+        el.style.color = "rgba(125,211,252,0.14)";
       } else if (variantChance > 0.7) {
         el.className = "eq eq-strong";
       } else if (variantChance > 0.35) {
@@ -541,15 +555,18 @@
       star.style.left = Math.random() * 100 + "vw";
       star.style.top = Math.random() * 100 + "vh";
 
-      const size = 1 + Math.random() * 2.2;
+      const size = 2 + Math.random() * 3.8;
       star.style.width = size + "px";
       star.style.height = size + "px";
-      star.style.animationDuration = (1.8 + Math.random() * 2.8) + "s";
+
+      const pulseDuration = (1.4 + Math.random() * 1.8) + "s";
+      const driftDuration = (6 + Math.random() * 8) + "s";
+      star.style.animationDuration = `${pulseDuration}, ${driftDuration}`;
 
       dashboardBg.appendChild(star);
     }
 
-    for (let i = 0; i < 260; i++) {
+    for (let i = 0; i < 420; i++) {
       createStar();
     }
 
