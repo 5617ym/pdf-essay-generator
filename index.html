@@ -7,7 +7,7 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&family=Caveat:wght@500;700&display=swap" rel="stylesheet">
 
   <style>
     *{
@@ -47,89 +47,118 @@
         radial-gradient(circle at 80% 22%, rgba(255,255,255,0.016) 0 1px, transparent 1px),
         radial-gradient(circle at 30% 78%, rgba(255,255,255,0.014) 0 1px, transparent 1px),
         radial-gradient(circle at 72% 70%, rgba(255,255,255,0.014) 0 1px, transparent 1px);
-      background-size: 140px 140px, 180px 180px, 160px 160px, 150px 150px;
+      background-size: 110px 110px, 140px 140px, 130px 130px, 120px 120px;
       mix-blend-mode:screen;
     }
 
-    /* رموز وخطوط كثيرة وصغيرة */
+    /* خط مختلف للرموز */
     .eq{
       position:absolute;
-      color:rgba(255,255,255,0.15);
+      color:rgba(255,255,255,0.13);
+      font-family:'Caveat', cursive;
       font-weight:700;
       white-space:nowrap;
       text-shadow:0 0 2px rgba(255,255,255,0.03);
       user-select:none;
-      font-family:'Tajawal',sans-serif;
       line-height:1;
+      letter-spacing:0.4px;
     }
 
-    .eq-soft{ color:rgba(255,255,255,0.10); }
-    .eq-mid{ color:rgba(255,255,255,0.14); }
+    .eq-soft{ color:rgba(255,255,255,0.08); }
+    .eq-mid{ color:rgba(255,255,255,0.13); }
     .eq-strong{ color:rgba(255,255,255,0.18); }
+    .eq-glow{
+      color:rgba(148, 220, 255, 0.36);
+      text-shadow:
+        0 0 4px rgba(125,211,252,0.10),
+        0 0 10px rgba(56,189,248,0.12),
+        0 0 18px rgba(59,130,246,0.10);
+    }
 
-    .eq1{ top:3%; left:3%; font-size:20px; transform:rotate(-3deg); }
-    .eq2{ top:4%; left:20%; font-size:16px; transform:rotate(2deg); }
-    .eq3{ top:4%; left:36%; font-size:18px; transform:rotate(-1deg); }
-    .eq4{ top:3%; left:57%; font-size:17px; transform:rotate(3deg); }
-    .eq5{ top:4%; right:4%; font-size:19px; transform:rotate(-2deg); }
+    .eq1{ top:2%; left:3%; font-size:22px; transform:rotate(-3deg); }
+    .eq2{ top:2.5%; left:18%; font-size:16px; transform:rotate(3deg); }
+    .eq3{ top:2%; left:32%; font-size:18px; transform:rotate(-2deg); }
+    .eq4{ top:2.5%; left:48%; font-size:17px; transform:rotate(2deg); }
+    .eq5{ top:2%; left:63%; font-size:18px; transform:rotate(-3deg); }
+    .eq6{ top:2.5%; right:4%; font-size:22px; transform:rotate(2deg); }
 
-    .eq6{ top:13%; left:4%; font-size:17px; transform:rotate(-5deg); }
-    .eq7{ top:14%; left:26%; font-size:15px; transform:rotate(3deg); }
-    .eq8{ top:13%; left:46%; font-size:16px; transform:rotate(-2deg); }
-    .eq9{ top:14%; right:11%; font-size:18px; transform:rotate(4deg); }
+    .eq7{ top:10%; left:4%; font-size:18px; transform:rotate(-5deg); }
+    .eq8{ top:11%; left:15%; font-size:14px; transform:rotate(4deg); }
+    .eq9{ top:10%; left:27%; font-size:16px; transform:rotate(-2deg); }
+    .eq10{ top:11%; left:42%; font-size:16px; transform:rotate(3deg); }
+    .eq11{ top:10%; left:56%; font-size:15px; transform:rotate(-4deg); }
+    .eq12{ top:11%; right:10%; font-size:18px; transform:rotate(4deg); }
 
-    .eq10{ top:22%; left:5%; font-size:18px; transform:rotate(2deg); }
-    .eq11{ top:23%; left:31%; font-size:16px; transform:rotate(-3deg); }
-    .eq12{ top:22%; right:6%; font-size:17px; transform:rotate(1deg); }
+    .eq13{ top:18%; left:3%; font-size:20px; transform:rotate(2deg); }
+    .eq14{ top:19%; left:14%; font-size:14px; transform:rotate(-3deg); }
+    .eq15{ top:18%; left:25%; font-size:17px; transform:rotate(3deg); }
+    .eq16{ top:19%; left:37%; font-size:16px; transform:rotate(-3deg); }
+    .eq17{ top:18%; left:50%; font-size:15px; transform:rotate(2deg); }
+    .eq18{ top:19%; right:8%; font-size:19px; transform:rotate(-2deg); }
 
-    .eq13{ top:33%; left:4%; font-size:17px; transform:rotate(-2deg); }
-    .eq14{ top:34%; left:22%; font-size:15px; transform:rotate(3deg); }
-    .eq15{ top:34%; left:42%; font-size:16px; transform:rotate(-4deg); }
-    .eq16{ top:33%; right:10%; font-size:17px; transform:rotate(2deg); }
+    .eq19{ top:27%; left:4%; font-size:18px; transform:rotate(-2deg); }
+    .eq20{ top:27.5%; left:17%; font-size:15px; transform:rotate(4deg); }
+    .eq21{ top:27%; left:29%; font-size:17px; transform:rotate(-4deg); }
+    .eq22{ top:27.5%; left:41%; font-size:15px; transform:rotate(2deg); }
+    .eq23{ top:27%; left:54%; font-size:17px; transform:rotate(-3deg); }
+    .eq24{ top:27.5%; right:9%; font-size:18px; transform:rotate(3deg); }
 
-    .eq17{ top:44%; left:6%; font-size:16px; transform:rotate(-1deg); }
-    .eq18{ top:46%; left:29%; font-size:20px; transform:rotate(2deg); }
-    .eq19{ top:45%; right:8%; font-size:18px; transform:rotate(-2deg); }
+    .eq25{ top:36%; left:4%; font-size:21px; transform:rotate(2deg); }
+    .eq26{ top:36.5%; left:18%; font-size:14px; transform:rotate(-4deg); }
+    .eq27{ top:36%; left:31%; font-size:16px; transform:rotate(3deg); }
+    .eq28{ top:36.5%; left:45%; font-size:15px; transform:rotate(-3deg); }
+    .eq29{ top:36%; left:59%; font-size:15px; transform:rotate(3deg); }
+    .eq30{ top:36.5%; right:8%; font-size:19px; transform:rotate(-2deg); }
 
-    .eq20{ top:57%; left:4%; font-size:18px; transform:rotate(3deg); }
-    .eq21{ top:58%; left:20%; font-size:16px; transform:rotate(-3deg); }
-    .eq22{ top:58%; left:38%; font-size:15px; transform:rotate(1deg); }
-    .eq23{ top:57%; right:12%; font-size:17px; transform:rotate(3deg); }
+    .eq31{ top:46%; left:4%; font-size:18px; transform:rotate(-3deg); }
+    .eq32{ top:46.5%; left:16%; font-size:14px; transform:rotate(4deg); }
+    .eq33{ top:46%; left:28%; font-size:22px; transform:rotate(-2deg); }
+    .eq34{ top:46.5%; left:43%; font-size:16px; transform:rotate(3deg); }
+    .eq35{ top:46%; left:58%; font-size:16px; transform:rotate(-4deg); }
+    .eq36{ top:46.5%; right:9%; font-size:20px; transform:rotate(2deg); }
 
-    .eq24{ top:69%; left:4%; font-size:16px; transform:rotate(-2deg); }
-    .eq25{ top:70%; left:27%; font-size:15px; transform:rotate(4deg); }
-    .eq26{ top:69%; left:46%; font-size:16px; transform:rotate(-1deg); }
-    .eq27{ top:70%; right:7%; font-size:18px; transform:rotate(-4deg); }
+    .eq37{ top:56%; left:3%; font-size:20px; transform:rotate(3deg); }
+    .eq38{ top:56.5%; left:16%; font-size:14px; transform:rotate(-3deg); }
+    .eq39{ top:56%; left:28%; font-size:16px; transform:rotate(4deg); }
+    .eq40{ top:56.5%; left:40%; font-size:15px; transform:rotate(-3deg); }
+    .eq41{ top:56%; left:54%; font-size:17px; transform:rotate(2deg); }
+    .eq42{ top:56.5%; right:9%; font-size:18px; transform:rotate(-3deg); }
 
-    .eq28{ top:81%; left:3%; font-size:18px; transform:rotate(2deg); }
-    .eq29{ top:82%; left:22%; font-size:16px; transform:rotate(-2deg); }
-    .eq30{ top:81%; left:40%; font-size:17px; transform:rotate(3deg); }
-    .eq31{ top:82%; right:9%; font-size:18px; transform:rotate(-3deg); }
+    .eq43{ top:66%; left:4%; font-size:18px; transform:rotate(-2deg); }
+    .eq44{ top:66.5%; left:18%; font-size:14px; transform:rotate(3deg); }
+    .eq45{ top:66%; left:30%; font-size:16px; transform:rotate(-3deg); }
+    .eq46{ top:66.5%; left:43%; font-size:14px; transform:rotate(4deg); }
+    .eq47{ top:66%; left:57%; font-size:17px; transform:rotate(-2deg); }
+    .eq48{ top:66.5%; right:7%; font-size:20px; transform:rotate(3deg); }
 
-    .eq32{ top:9%; left:12%; font-size:14px; transform:rotate(-7deg); }
-    .eq33{ top:18%; right:22%; font-size:14px; transform:rotate(5deg); }
-    .eq34{ top:28%; left:14%; font-size:13px; transform:rotate(-4deg); }
-    .eq35{ top:40%; right:20%; font-size:14px; transform:rotate(4deg); }
-    .eq36{ top:50%; left:15%; font-size:13px; transform:rotate(-5deg); }
-    .eq37{ top:63%; right:22%; font-size:14px; transform:rotate(3deg); }
-    .eq38{ top:75%; left:15%; font-size:13px; transform:rotate(-4deg); }
-    .eq39{ top:87%; right:18%; font-size:14px; transform:rotate(5deg); }
+    .eq49{ top:76%; left:3%; font-size:21px; transform:rotate(2deg); }
+    .eq50{ top:76.5%; left:16%; font-size:14px; transform:rotate(-4deg); }
+    .eq51{ top:76%; left:28%; font-size:15px; transform:rotate(4deg); }
+    .eq52{ top:76.5%; left:40%; font-size:14px; transform:rotate(-3deg); }
+    .eq53{ top:76%; left:54%; font-size:16px; transform:rotate(2deg); }
+    .eq54{ top:76.5%; right:9%; font-size:17px; transform:rotate(-4deg); }
 
-    /* رسومات خفيفة وصغيرة */
+    .eq55{ top:86%; left:3%; font-size:18px; transform:rotate(-2deg); }
+    .eq56{ top:86.5%; left:15%; font-size:14px; transform:rotate(4deg); }
+    .eq57{ top:86%; left:27%; font-size:17px; transform:rotate(-3deg); }
+    .eq58{ top:86.5%; left:40%; font-size:14px; transform:rotate(3deg); }
+    .eq59{ top:86%; left:54%; font-size:15px; transform:rotate(-2deg); }
+    .eq60{ top:86.5%; right:8%; font-size:20px; transform:rotate(3deg); }
+
     .graph,
     .hyperbola,
     .unit-circle,
     .small-circle,
     .axis-block{
       position:absolute;
-      opacity:0.38;
+      opacity:0.22;
     }
 
-    .graph{ top:17%; left:52%; width:220px; height:105px; }
-    .hyperbola{ top:49%; right:19%; width:135px; height:105px; }
-    .unit-circle{ right:7%; bottom:8%; width:145px; height:145px; }
-    .small-circle{ top:18%; left:18%; width:70px; height:70px; }
-    .axis-block{ bottom:16%; left:29%; width:110px; height:95px; }
+    .graph{ top:17%; left:50%; width:180px; height:90px; }
+    .hyperbola{ top:50%; right:18%; width:120px; height:95px; }
+    .unit-circle{ right:7%; bottom:7%; width:120px; height:120px; }
+    .small-circle{ top:18%; left:18%; width:54px; height:54px; }
+    .axis-block{ bottom:15%; left:31%; width:90px; height:80px; }
 
     .graph svg,
     .hyperbola svg,
@@ -143,29 +172,38 @@
       content:"";
       position:absolute;
       inset:0;
-      border:2px solid rgba(255,255,255,0.26);
+      border:2px solid rgba(255,255,255,0.18);
       border-radius:50%;
     }
 
     .small-circle::after{
       content:"";
       position:absolute;
-      top:34px;
-      left:30px;
-      width:28px;
+      top:26px;
+      left:22px;
+      width:22px;
       height:2px;
-      background:rgba(255,255,255,0.26);
+      background:rgba(255,255,255,0.18);
     }
 
-    /* رموز متحركة كثيرة وبطيئة */
     .float-symbol{
       position:absolute;
-      color:rgba(255,255,255,0.11);
+      color:rgba(255,255,255,0.09);
       font-weight:700;
+      font-family:'Caveat', cursive;
       user-select:none;
       white-space:nowrap;
       animation:floatSlow linear infinite;
       opacity:0;
+      text-shadow:0 0 6px rgba(255,255,255,0.04);
+    }
+
+    .float-symbol.glow{
+      color:rgba(132, 212, 255, 0.24);
+      text-shadow:
+        0 0 5px rgba(125,211,252,0.12),
+        0 0 12px rgba(56,189,248,0.12),
+        0 0 18px rgba(37,99,235,0.08);
     }
 
     @keyframes floatSlow{
@@ -174,10 +212,10 @@
         opacity:0;
       }
       8%{
-        opacity:0.35;
+        opacity:0.30;
       }
       55%{
-        opacity:0.42;
+        opacity:0.38;
       }
       100%{
         transform:translateY(-18vh) translateX(8px) rotate(7deg);
@@ -336,14 +374,15 @@
 
     @media (max-width:900px){
       .eq{
-        font-size:14px !important;
+        font-size:12px !important;
       }
+
       .graph,
       .hyperbola,
       .unit-circle,
       .small-circle,
       .axis-block{
-        opacity:0.22;
+        opacity:0.15;
       }
     }
 
@@ -369,81 +408,108 @@
     <div class="chalk-noise"></div>
 
     <div class="eq eq-strong eq1">n = ∑ Cₖ xⁿ⁻ᵏ yᵏ(x+y)</div>
-    <div class="eq eq-mid eq2">2x² + 3x + 4 = y</div>
-    <div class="eq eq-strong eq3">a³+b³=(a+b)(a²-ab+b²)</div>
-    <div class="eq eq-mid eq4">1 = 3⁰</div>
+    <div class="eq eq-soft eq2">x+y</div>
+    <div class="eq eq-mid eq3">2x² + 3x + 4 = y</div>
+    <div class="eq eq-soft eq4">3⁰ = 1</div>
     <div class="eq eq-mid eq5">loga 1 = 0</div>
-    <div class="eq eq-strong eq6">logc(a/b)=logc a − logc b</div>
-    <div class="eq eq-soft eq7">k = ½ n(n+1)∑</div>
-    <div class="eq eq-mid eq8">c² = a² + b²</div>
+    <div class="eq eq-glow eq6">a³+b³=(a+b)(a²-ab+b²)</div>
 
+    <div class="eq eq-mid eq7">logc(a/b)=logc a − logc b</div>
+    <div class="eq eq-soft eq8">∑k = ½ n(n+1)</div>
     <div class="eq eq-soft eq9">a²+b²</div>
     <div class="eq eq-mid eq10">y = ax² + bx + c</div>
-    <div class="eq eq-strong eq11">π ≈ 3.14</div>
-    <div class="eq eq-soft eq12">√2</div>
-    <div class="eq eq-soft eq13">4⁻² = (1/4)²</div>
+    <div class="eq eq-soft eq11">a²−b²</div>
+    <div class="eq eq-soft eq12">2√</div>
 
-    <div class="eq eq-mid eq14">y = sinx</div>
-    <div class="eq eq-mid eq15">2 = 8∛ − 8−∛</div>
-    <div class="eq eq-strong eq16">sin²y + cos²y = 1</div>
-    <div class="eq eq-soft eq17">A = Lw</div>
-    <div class="eq eq-mid eq18">c = aᶜ / bᶜ(a/b)</div>
+    <div class="eq eq-soft eq13">²(1/4) = 4⁻²</div>
+    <div class="eq eq-glow eq14">cos x</div>
+    <div class="eq eq-mid eq15">y = sinx</div>
+    <div class="eq eq-soft eq16">c =</div>
+    <div class="eq eq-soft eq17">sin x</div>
+    <div class="eq eq-glow eq18">sin²y + cos²y = 1</div>
 
-    <div class="eq eq-soft eq19">x² + y² = r²</div>
-    <div class="eq eq-soft eq20">f(x) = x² + 1</div>
-    <div class="eq eq-soft eq21">∫ x dx</div>
-    <div class="eq eq-soft eq22">tan θ</div>
-    <div class="eq eq-soft eq23">μ + σ</div>
-    <div class="eq eq-soft eq24">x/2 + y/3</div>
-    <div class="eq eq-soft eq25">a-b</div>
-    <div class="eq eq-soft eq26">λy</div>
-    <div class="eq eq-soft eq27">P(A)</div>
-    <div class="eq eq-soft eq28">∇f</div>
-    <div class="eq eq-soft eq29">x≤y</div>
-    <div class="eq eq-soft eq30">∞</div>
-    <div class="eq eq-soft eq31">∂/∂x</div>
-    <div class="eq eq-soft eq32">x+y</div>
-    <div class="eq eq-soft eq33">a²−b²</div>
-    <div class="eq eq-soft eq34">cos x</div>
-    <div class="eq eq-soft eq35">sin x</div>
-    <div class="eq eq-soft eq36">log x</div>
-    <div class="eq eq-soft eq37">dy/dx</div>
+    <div class="eq eq-mid eq19">f(x)=x²+1</div>
+    <div class="eq eq-soft eq20">log x</div>
+    <div class="eq eq-soft eq21">x dx∫</div>
+    <div class="eq eq-soft eq22">a-b</div>
+    <div class="eq eq-soft eq23">dy/dx</div>
+    <div class="eq eq-mid eq24">x²+y²=r²</div>
+
+    <div class="eq eq-mid eq25">A = Lw</div>
+    <div class="eq eq-soft eq26">x²</div>
+    <div class="eq eq-soft eq27">µ + σ</div>
+    <div class="eq eq-soft eq28">P(A)</div>
+    <div class="eq eq-soft eq29">x/3</div>
+    <div class="eq eq-mid eq30">c = aᶜ / bᶜ(a/b)</div>
+
+    <div class="eq eq-soft eq31">f∇</div>
+    <div class="eq eq-soft eq32">x≤y</div>
+    <div class="eq eq-soft eq33">π ≈ 3.14</div>
+    <div class="eq eq-soft eq34">tan θ</div>
+    <div class="eq eq-soft eq35">∂/∂x</div>
+    <div class="eq eq-soft eq36">√2</div>
+
+    <div class="eq eq-soft eq37">x/2 + y/3</div>
     <div class="eq eq-soft eq38">x²</div>
     <div class="eq eq-soft eq39">y²</div>
+    <div class="eq eq-soft eq40">f(x)</div>
+    <div class="eq eq-soft eq41">∞</div>
+    <div class="eq eq-soft eq42">λy</div>
+
+    <div class="eq eq-soft eq43">a+b</div>
+    <div class="eq eq-soft eq44">∆</div>
+    <div class="eq eq-soft eq45">log y</div>
+    <div class="eq eq-soft eq46">cos y</div>
+    <div class="eq eq-soft eq47">sin y</div>
+    <div class="eq eq-soft eq48">x−y</div>
+
+    <div class="eq eq-soft eq49">P(B)</div>
+    <div class="eq eq-soft eq50">μ</div>
+    <div class="eq eq-soft eq51">σ²</div>
+    <div class="eq eq-soft eq52">x/4</div>
+    <div class="eq eq-soft eq53">kλ</div>
+    <div class="eq eq-soft eq54">tan x</div>
+
+    <div class="eq eq-soft eq55">∫ y dx</div>
+    <div class="eq eq-soft eq56">a²+b²</div>
+    <div class="eq eq-soft eq57">f’(x)</div>
+    <div class="eq eq-soft eq58">∑n</div>
+    <div class="eq eq-soft eq59">x+y</div>
+    <div class="eq eq-glow eq60">x²+y²</div>
 
     <div class="small-circle"></div>
 
     <div class="graph">
-      <svg viewBox="0 0 220 105" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <line x1="10" y1="52" x2="210" y2="52" stroke="rgba(255,255,255,0.24)" stroke-width="2"/>
-        <line x1="110" y1="8" x2="110" y2="98" stroke="rgba(255,255,255,0.24)" stroke-width="2"/>
-        <path d="M12 51 C32 20, 58 20, 78 51 S124 82, 144 51 S190 20, 208 51"
-              stroke="rgba(255,255,255,0.28)" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+      <svg viewBox="0 0 180 90" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <line x1="10" y1="45" x2="170" y2="45" stroke="rgba(255,255,255,0.16)" stroke-width="1.6"/>
+        <line x1="90" y1="8" x2="90" y2="82" stroke="rgba(255,255,255,0.16)" stroke-width="1.6"/>
+        <path d="M10 45 C26 22, 46 22, 62 45 S98 68, 114 45 S150 22, 170 45"
+              stroke="rgba(255,255,255,0.20)" stroke-width="2" fill="none" stroke-linecap="round"/>
       </svg>
     </div>
 
     <div class="hyperbola">
-      <svg viewBox="0 0 135 105" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <line x1="8" y1="52" x2="127" y2="52" stroke="rgba(255,255,255,0.20)" stroke-width="2"/>
-        <line x1="67" y1="8" x2="67" y2="97" stroke="rgba(255,255,255,0.20)" stroke-width="2"/>
-        <path d="M15 34 C28 34, 40 28, 49 14" stroke="rgba(255,255,255,0.26)" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-        <path d="M15 70 C28 70, 40 76, 49 90" stroke="rgba(255,255,255,0.26)" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+      <svg viewBox="0 0 120 95" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <line x1="8" y1="47" x2="112" y2="47" stroke="rgba(255,255,255,0.14)" stroke-width="1.6"/>
+        <line x1="60" y1="8" x2="60" y2="87" stroke="rgba(255,255,255,0.14)" stroke-width="1.6"/>
+        <path d="M14 31 C25 31, 35 26, 43 14" stroke="rgba(255,255,255,0.18)" stroke-width="2" fill="none" stroke-linecap="round"/>
+        <path d="M14 63 C25 63, 35 68, 43 80" stroke="rgba(255,255,255,0.18)" stroke-width="2" fill="none" stroke-linecap="round"/>
       </svg>
     </div>
 
     <div class="unit-circle">
-      <svg viewBox="0 0 145 145" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="72.5" cy="72.5" r="42" stroke="rgba(255,255,255,0.28)" stroke-width="2.5"/>
-        <line x1="10" y1="72.5" x2="135" y2="72.5" stroke="rgba(255,255,255,0.18)" stroke-width="2"/>
-        <line x1="72.5" y1="10" x2="72.5" y2="135" stroke="rgba(255,255,255,0.18)" stroke-width="2"/>
-        <line x1="72.5" y1="72.5" x2="104" y2="46" stroke="rgba(255,255,255,0.24)" stroke-width="2.5"/>
+      <svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="60" cy="60" r="36" stroke="rgba(255,255,255,0.20)" stroke-width="2"/>
+        <line x1="10" y1="60" x2="110" y2="60" stroke="rgba(255,255,255,0.12)" stroke-width="1.6"/>
+        <line x1="60" y1="10" x2="60" y2="110" stroke="rgba(255,255,255,0.12)" stroke-width="1.6"/>
+        <line x1="60" y1="60" x2="86" y2="39" stroke="rgba(255,255,255,0.18)" stroke-width="2"/>
       </svg>
     </div>
 
     <div class="axis-block">
-      <svg viewBox="0 0 110 95" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <line x1="12" y1="48" x2="98" y2="48" stroke="rgba(255,255,255,0.14)" stroke-width="2"/>
-        <line x1="55" y1="12" x2="55" y2="84" stroke="rgba(255,255,255,0.14)" stroke-width="2"/>
+      <svg viewBox="0 0 90 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <line x1="10" y1="40" x2="80" y2="40" stroke="rgba(255,255,255,0.10)" stroke-width="1.5"/>
+        <line x1="45" y1="10" x2="45" y2="70" stroke="rgba(255,255,255,0.10)" stroke-width="1.5"/>
       </svg>
     </div>
   </div>
@@ -518,30 +584,31 @@
 
     const chalkboardBg = document.getElementById("chalkboardBg");
     const floatSymbols = [
-      "+","-","×","÷","=","√","∑","π","∞","∆","∂","θ","λ","x²","y²","f(x)","dy/dx","log","sin","cos"
+      "+","-","×","÷","=","√","∑","π","∞","∆","∂","θ","λ","x²","y²","f(x)","dy/dx","log","sin","cos","tan","μ","σ"
     ];
 
     function createFloatSymbol(){
       const el = document.createElement("span");
-      el.className = "float-symbol";
+      const isGlow = Math.random() > 0.84;
+      el.className = isGlow ? "float-symbol glow" : "float-symbol";
       el.textContent = floatSymbols[Math.floor(Math.random() * floatSymbols.length)];
       el.style.left = Math.random() * 100 + "vw";
-      el.style.top = (100 + Math.random() * 6) + "vh";
-      el.style.fontSize = (8 + Math.random() * 6) + "px";
-      el.style.animationDuration = (30 + Math.random() * 18) + "s";
+      el.style.top = (100 + Math.random() * 5) + "vh";
+      el.style.fontSize = (7 + Math.random() * 5) + "px";
+      el.style.animationDuration = (34 + Math.random() * 20) + "s";
 
       chalkboardBg.appendChild(el);
 
       setTimeout(() => {
         el.remove();
-      }, 52000);
+      }, 58000);
     }
 
-    for(let i = 0; i < 260; i++){
-      setTimeout(createFloatSymbol, i * 90);
+    for(let i = 0; i < 420; i++){
+      setTimeout(createFloatSymbol, i * 45);
     }
 
-    setInterval(createFloatSymbol, 140);
+    setInterval(createFloatSymbol, 90);
   </script>
 
 </body>
