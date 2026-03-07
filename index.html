@@ -1,113 +1,172 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-<meta charset="UTF-8">
-<title>Question Generator</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>مولد الأسئلة</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
 
-<style>
+  <style>
+    *{
+      box-sizing:border-box;
+    }
 
-body{
-font-family:'Tajawal', sans-serif;
-background:linear-gradient(135deg,#1e3c72,#2a5298);
-height:100vh;
-display:flex;
-align-items:center;
-justify-content:center;
-margin:0;
-color:white;
-}
+    body{
+      margin:0;
+      font-family:'Tajawal',sans-serif;
+      min-height:100vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      background:
+        radial-gradient(circle at top left, rgba(0,198,255,0.22), transparent 30%),
+        radial-gradient(circle at bottom right, rgba(124,58,237,0.20), transparent 30%),
+        linear-gradient(135deg, #0f172a 0%, #111827 45%, #1e293b 100%);
+      padding:24px;
+      color:#0f172a;
+    }
 
-.container{
-background:white;
-color:#222;
-padding:40px;
-border-radius:20px;
-width:420px;
-box-shadow:0 20px 60px rgba(0,0,0,0.2);
-text-align:center;
-}
+    .card{
+      width:100%;
+      max-width:560px;
+      background:rgba(255,255,255,0.94);
+      backdrop-filter:blur(14px);
+      border:1px solid rgba(255,255,255,0.35);
+      border-radius:28px;
+      padding:34px 28px;
+      box-shadow:0 20px 60px rgba(0,0,0,0.28);
+    }
 
-.welcome{
-font-size:34px;
-font-weight:700;
-margin-bottom:5px;
-}
+    .welcome{
+      font-size:36px;
+      font-weight:800;
+      margin:0 0 8px;
+      color:#111827;
+      text-align:center;
+    }
 
-.sub{
-font-size:18px;
-color:#666;
-margin-bottom:30px;
-}
+    .sub{
+      font-size:31px;
+      font-weight:500;
+      margin:0 0 28px;
+      color:#475569;
+      text-align:center;
+    }
 
-input, select{
-width:100%;
-padding:12px;
-margin:10px 0;
-border-radius:10px;
-border:1px solid #ddd;
-font-size:16px;
-}
+    .field{
+      margin-bottom:18px;
+    }
 
-button{
-width:100%;
-padding:14px;
-margin-top:20px;
-border:none;
-border-radius:12px;
-background:linear-gradient(135deg,#00c6ff,#0072ff);
-color:white;
-font-size:18px;
-font-weight:bold;
-cursor:pointer;
-transition:0.3s;
-}
+    label{
+      display:block;
+      font-size:15px;
+      font-weight:700;
+      color:#334155;
+      margin-bottom:8px;
+    }
 
-button:hover{
-transform:scale(1.03);
-box-shadow:0 10px 20px rgba(0,0,0,0.2);
-}
+    input[type="file"],
+    select{
+      width:100%;
+      padding:14px 16px;
+      border-radius:16px;
+      border:1px solid #dbeafe;
+      background:#f8fafc;
+      font-size:16px;
+      font-family:'Tajawal',sans-serif;
+      outline:none;
+      transition:0.2s ease;
+    }
 
-</style>
+    input[type="file"]:focus,
+    select:focus{
+      border-color:#38bdf8;
+      box-shadow:0 0 0 4px rgba(56,189,248,0.16);
+      background:#fff;
+    }
+
+    button{
+      width:100%;
+      border:none;
+      border-radius:18px;
+      padding:16px;
+      font-size:18px;
+      font-weight:800;
+      font-family:'Tajawal',sans-serif;
+      cursor:pointer;
+      color:#fff;
+      background:linear-gradient(135deg,#06b6d4 0%, #2563eb 55%, #7c3aed 100%);
+      box-shadow:0 14px 30px rgba(37,99,235,0.28);
+      transition:transform 0.18s ease, box-shadow 0.18s ease, opacity 0.18s ease;
+    }
+
+    button:hover{
+      transform:translateY(-2px);
+      box-shadow:0 18px 34px rgba(37,99,235,0.32);
+    }
+
+    .note{
+      margin-top:14px;
+      text-align:center;
+      font-size:14px;
+      color:#64748b;
+    }
+
+    @media (max-width:640px){
+      .card{
+        padding:28px 18px;
+        border-radius:24px;
+      }
+
+      .welcome{
+        font-size:30px;
+      }
+
+      .sub{
+        font-size:25px;
+      }
+    }
+  </style>
 </head>
-
 <body>
 
-<div class="container">
+  <div class="card">
+    <p class="welcome">ارحب مشعل</p>
+    <p class="sub">يوسف موصيني عليك و انا بخدمتك</p>
 
-<div class="welcome">
-ارحب مشعل
-</div>
+    <div class="field">
+      <label for="pdfFile">رفع الملف</label>
+      <input id="pdfFile" type="file" accept=".pdf">
+    </div>
 
-<div class="sub">
-يوسف موصيني عليك و انا بخدمتك
-</div>
+    <div class="field">
+      <label for="questionCount">عدد الأسئلة</label>
+      <select id="questionCount">
+        <option>5</option>
+        <option>10</option>
+        <option>15</option>
+        <option>20</option>
+      </select>
+    </div>
 
-<input type="file" accept=".pdf">
+    <div class="field">
+      <label for="questionType">نوع الأسئلة</label>
+      <select id="questionType">
+        <option>مقالية</option>
+        <option>اختيار من متعدد</option>
+        <option>مقالية + اختيار من متعدد</option>
+        <option>مسائل رياضية</option>
+        <option>الكل</option>
+      </select>
+    </div>
 
-<select>
-<option>عدد الأسئلة</option>
-<option>5</option>
-<option>10</option>
-<option>15</option>
-<option>20</option>
-</select>
+    <button type="button">توليد الأسئلة</button>
 
-<select>
-<option>نوع الأسئلة</option>
-<option>مقالية</option>
-<option>اختيار من متعدد</option>
-<option>مقالية + اختيار من متعدد</option>
-<option>مسائل رياضية</option>
-<option>الكل</option>
-</select>
-
-<button>
-توليد الأسئلة
-</button>
-
-</div>
+    <div class="note">النسخة الحالية واجهة أولية، وسيتم لاحقًا ربطها بقراءة الملف وتوليد الأسئلة منه.</div>
+  </div>
 
 </body>
 </html>
