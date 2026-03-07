@@ -10,9 +10,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
 
   <style>
-    *{
-      box-sizing:border-box;
-    }
+    *{ box-sizing:border-box; }
 
     body{
       margin:0;
@@ -23,14 +21,14 @@
       justify-content:center;
       padding:24px;
       overflow:hidden;
-      background:
-        radial-gradient(circle at 15% 20%, rgba(0,198,255,0.14), transparent 26%),
-        radial-gradient(circle at 85% 80%, rgba(124,58,237,0.16), transparent 26%),
-        linear-gradient(135deg, #07111f 0%, #08152a 40%, #121b48 100%);
       position:relative;
+      background:
+        radial-gradient(circle at 20% 20%, rgba(0,198,255,0.12), transparent 25%),
+        radial-gradient(circle at 80% 80%, rgba(124,58,237,0.14), transparent 25%),
+        linear-gradient(135deg, #07111f 0%, #08152a 45%, #121b48 100%);
     }
 
-    /* الخلفية الحسابية فقط */
+    /* الخلفية المطلوبة */
     .math-bg{
       position:fixed;
       inset:0;
@@ -41,21 +39,18 @@
 
     .math-symbol{
       position:absolute;
-      color:rgba(133, 193, 255, 0.18);
       font-weight:800;
       user-select:none;
       white-space:nowrap;
-      text-shadow:0 0 12px rgba(59,130,246,0.12);
       animation:floatUp linear infinite;
+      opacity:0;
+      text-shadow:0 0 10px rgba(59,130,246,0.15);
     }
 
-    .math-symbol.soft{
-      color:rgba(198, 181, 255, 0.14);
-    }
-
-    .math-symbol.bright{
-      color:rgba(125, 230, 255, 0.22);
-    }
+    .math-blue{ color:rgba(93, 182, 255, 0.26); }
+    .math-cyan{ color:rgba(89, 230, 255, 0.22); }
+    .math-purple{ color:rgba(170, 126, 255, 0.22); }
+    .math-soft{ color:rgba(255,255,255,0.12); }
 
     @keyframes floatUp{
       0%{
@@ -66,16 +61,15 @@
         opacity:1;
       }
       50%{
-        transform:translateY(40vh) translateX(8px) rotate(6deg);
+        transform:translateY(45vh) translateX(10px) rotate(6deg);
         opacity:1;
       }
       100%{
-        transform:translateY(-15vh) translateX(-8px) rotate(14deg);
+        transform:translateY(-15vh) translateX(-10px) rotate(14deg);
         opacity:0;
       }
     }
 
-    /* البطاقة كما هي تقريبًا */
     .card{
       position:relative;
       z-index:2;
@@ -105,9 +99,7 @@
       text-align:center;
     }
 
-    .field{
-      margin-bottom:18px;
-    }
+    .field{ margin-bottom:18px; }
 
     label{
       display:block;
@@ -195,7 +187,7 @@
       color:#fff;
       background:linear-gradient(135deg,#18b7df 0%, #2e67f0 55%, #5320d6 100%);
       box-shadow:0 14px 30px rgba(37,99,235,0.28);
-      transition:transform 0.18s ease, box-shadow 0.18s ease, opacity 0.18s ease;
+      transition:transform 0.18s ease, box-shadow 0.18s ease;
     }
 
     button:hover{
@@ -211,18 +203,9 @@
     }
 
     @media (max-width:640px){
-      .card{
-        padding:28px 18px;
-        border-radius:24px;
-      }
-
-      .welcome{
-        font-size:30px;
-      }
-
-      .sub{
-        font-size:21px;
-      }
+      .card{ padding:28px 18px; border-radius:24px; }
+      .welcome{ font-size:30px; }
+      .sub{ font-size:21px; }
     }
   </style>
 </head>
@@ -236,7 +219,6 @@
 
     <div class="field">
       <label for="pdfFile">رفع الملف</label>
-
       <div class="drop-zone" id="dropZone">
         <p>اسحب ملف PDF هنا</p>
         <span>أو اضغط لاختيار الملف</span>
@@ -267,7 +249,6 @@
     </div>
 
     <button type="button">توليد الأسئلة</button>
-
     <div class="note">النسخة الحالية واجهة أولية، وسيتم لاحقًا ربطها بقراءة الملف وتوليد الأسئلة منه.</div>
   </div>
 
@@ -276,16 +257,10 @@
     const fileInput = document.getElementById("pdfFile");
     const fileName = document.getElementById("fileName");
 
-    dropZone.addEventListener("click", () => {
-      fileInput.click();
-    });
+    dropZone.addEventListener("click", () => fileInput.click());
 
     fileInput.addEventListener("change", () => {
-      if (fileInput.files.length > 0) {
-        fileName.textContent = fileInput.files[0].name;
-      } else {
-        fileName.textContent = "لم يتم اختيار ملف بعد";
-      }
+      fileName.textContent = fileInput.files.length ? fileInput.files[0].name : "لم يتم اختيار ملف بعد";
     });
 
     dropZone.addEventListener("dragover", (e) => {
@@ -300,7 +275,6 @@
     dropZone.addEventListener("drop", (e) => {
       e.preventDefault();
       dropZone.classList.remove("dragover");
-
       if (e.dataTransfer.files.length > 0) {
         fileInput.files = e.dataTransfer.files;
         fileName.textContent = e.dataTransfer.files[0].name;
@@ -310,37 +284,28 @@
     const mathBg = document.getElementById("mathBg");
     const symbols = [
       "+","-","×","÷","=","≠","≈","√","∑","∫","π","∞","∆","∂","θ","λ",
-      "x²","y²","a+b","dy/dx","f(x)","( )","[ ]","{ }","µ","σ","cos","sin",
-      "tan","log","∇","∝","<",">","≤","≥"
+      "x²","y²","a+b","dy/dx","f(x)","µ","σ","cos","sin","tan","log","∇","≤","≥"
     ];
+    const classes = ["math-blue","math-cyan","math-purple","math-soft"];
 
     function createSymbol() {
       const el = document.createElement("span");
-      el.className = "math-symbol";
-
-      const variant = Math.random();
-      if (variant > 0.66) el.classList.add("soft");
-      else if (variant > 0.33) el.classList.add("bright");
-
+      el.className = "math-symbol " + classes[Math.floor(Math.random() * classes.length)];
       el.textContent = symbols[Math.floor(Math.random() * symbols.length)];
       el.style.left = Math.random() * 100 + "vw";
-      el.style.top = (100 + Math.random() * 20) + "vh";
-      el.style.fontSize = (14 + Math.random() * 18) + "px";
-      el.style.animationDuration = (16 + Math.random() * 18) + "s";
-      el.style.animationDelay = (Math.random() * 2) + "s";
-
+      el.style.top = (100 + Math.random() * 15) + "vh";
+      el.style.fontSize = (12 + Math.random() * 16) + "px";
+      el.style.animationDuration = (12 + Math.random() * 12) + "s";
       mathBg.appendChild(el);
 
-      setTimeout(() => {
-        el.remove();
-      }, 38000);
+      setTimeout(() => el.remove(), 26000);
     }
 
-    for (let i = 0; i < 60; i++) {
-      setTimeout(createSymbol, i * 180);
+    for (let i = 0; i < 80; i++) {
+      setTimeout(createSymbol, i * 120);
     }
 
-    setInterval(createSymbol, 450);
+    setInterval(createSymbol, 300);
   </script>
 
 </body>
