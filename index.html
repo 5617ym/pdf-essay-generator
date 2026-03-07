@@ -1,602 +1,368 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>مولد الأسئلة</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>مولد الأسئلة</title>
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&family=Caveat:wght@500;700&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;800&family=Caveat:wght@500;700&display=swap" rel="stylesheet">
 
-  <style>
-    *{
-      box-sizing:border-box;
-    }
+<style>
 
-    body{
-      margin:0;
-      font-family:'Tajawal',sans-serif;
-      min-height:100vh;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      padding:24px;
-      overflow:hidden;
-      position:relative;
-      background:
-        radial-gradient(circle at 18% 22%, rgba(27, 99, 214, 0.08), transparent 22%),
-        radial-gradient(circle at 82% 76%, rgba(84, 61, 201, 0.10), transparent 20%),
-        linear-gradient(135deg, #05070b 0%, #070b12 38%, #0a1019 100%);
-    }
+*{box-sizing:border-box}
 
-    .dashboard-bg{
-      position:fixed;
-      inset:0;
-      z-index:0;
-      pointer-events:none;
-      overflow:hidden;
-      opacity:1;
-    }
+body{
+margin:0;
+font-family:'Tajawal',sans-serif;
+min-height:100vh;
+display:flex;
+align-items:center;
+justify-content:center;
+overflow:hidden;
+background:
+radial-gradient(circle at 20% 20%, rgba(60,120,255,.07), transparent 25%),
+radial-gradient(circle at 80% 80%, rgba(140,80,255,.08), transparent 25%),
+linear-gradient(135deg,#05070b,#070c14,#0b1320);
+}
 
-    .bg-noise{
-      position:absolute;
-      inset:0;
-      background:
-        radial-gradient(circle at 12% 18%, rgba(255,255,255,0.014) 0 1px, transparent 1px),
-        radial-gradient(circle at 78% 20%, rgba(255,255,255,0.012) 0 1px, transparent 1px),
-        radial-gradient(circle at 22% 72%, rgba(255,255,255,0.010) 0 1px, transparent 1px),
-        radial-gradient(circle at 74% 68%, rgba(255,255,255,0.010) 0 1px, transparent 1px);
-      background-size: 90px 90px, 110px 110px, 100px 100px, 95px 95px;
-      mix-blend-mode:screen;
-      opacity:0.55;
-    }
+/* الخلفية */
 
-    .data-grid{
-      position:absolute;
-      inset:0;
-      background-image:
-        linear-gradient(rgba(52, 87, 138, 0.08) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(52, 87, 138, 0.08) 1px, transparent 1px);
-      background-size: 44px 44px;
-      opacity:0.16;
-    }
+.dashboard-bg{
+position:fixed;
+inset:0;
+z-index:0;
+overflow:hidden;
+}
 
-    .grid-glow{
-      position:absolute;
-      inset:0;
-      background:
-        linear-gradient(90deg, transparent 0%, rgba(37,99,235,0.06) 25%, transparent 50%, rgba(56,189,248,0.05) 75%, transparent 100%);
-      opacity:0.22;
-    }
+/* شبكة البيانات */
 
-    .eq{
-      position:absolute;
-      color:rgba(255,255,255,0.10);
-      font-family:'Caveat', cursive;
-      font-weight:700;
-      white-space:nowrap;
-      pointer-events:none;
-      user-select:none;
-      mix-blend-mode:screen;
-      letter-spacing:0.3px;
-      line-height:1;
-      text-shadow:0 0 2px rgba(255,255,255,0.02);
-    }
+.data-grid{
+position:absolute;
+inset:0;
+background-image:
+linear-gradient(rgba(80,120,255,.08) 1px, transparent 1px),
+linear-gradient(90deg, rgba(80,120,255,.08) 1px, transparent 1px);
+background-size:45px 45px;
+opacity:.25;
+}
 
-    .eq-soft{ color:rgba(255,255,255,0.06); }
-    .eq-mid{ color:rgba(255,255,255,0.10); }
-    .eq-strong{ color:rgba(255,255,255,0.14); }
+/* المعادلات */
 
-    .panel-line{
-      position:absolute;
-      border:1px solid rgba(47, 86, 150, 0.10);
-      border-radius:16px;
-      box-shadow:inset 0 0 25px rgba(37,99,235,0.02);
-    }
+.eq{
+position:absolute;
+color:rgba(255,255,255,.08);
+font-family:'Caveat',cursive;
+font-weight:700;
+white-space:nowrap;
+pointer-events:none;
+font-size:10px;
+}
 
-    .panel-1{ top:7%; left:4%; width:23%; height:22%; }
-    .panel-2{ top:10%; right:4%; width:21%; height:20%; }
-    .panel-3{ bottom:9%; left:5%; width:25%; height:24%; }
-    .panel-4{ bottom:8%; right:4%; width:24%; height:23%; }
+/* النجوم */
 
-    .mini-chart,
-    .mini-ring,
-    .mini-axis{
-      position:absolute;
-      opacity:0.14;
-    }
+.data-star{
+position:absolute;
+border-radius:50%;
+background:#ffffff;
 
-    .mini-chart{ top:18%; left:54%; width:180px; height:90px; }
-    .mini-ring{ right:8%; bottom:10%; width:120px; height:120px; }
-    .mini-axis{ bottom:16%; left:33%; width:100px; height:78px; }
+box-shadow:
+0 0 6px rgba(255,255,255,.9),
+0 0 12px rgba(255,255,255,.7),
+0 0 18px rgba(255,255,255,.4),
+0 0 30px rgba(120,180,255,.4);
 
-    .mini-chart svg,
-    .mini-ring svg,
-    .mini-axis svg{
-      width:100%;
-      height:100%;
-    }
+animation:starPulse 2s ease-in-out infinite,
+starDrift 10s linear infinite;
+}
 
-    .data-star{
-      position:absolute;
-      border-radius:50%;
-      background:#b9ecff;
-      box-shadow:
-        0 0 6px rgba(185,236,255,0.95),
-        0 0 12px rgba(125,211,252,0.85),
-        0 0 22px rgba(56,189,248,0.55),
-        0 0 34px rgba(37,99,235,0.30);
-      opacity:1;
-      animation:starPulse 2.2s ease-in-out infinite, starDrift 8s linear infinite;
-    }
+@keyframes starPulse{
+0%,100%{
+transform:scale(.8);
+opacity:.6
+}
+50%{
+transform:scale(1.8);
+opacity:1
+}
+}
 
-    @keyframes starPulse{
-      0%,100%{
-        transform:scale(0.9);
-        opacity:0.55;
-      }
-      50%{
-        transform:scale(1.8);
-        opacity:1;
-      }
-    }
+@keyframes starDrift{
+0%{transform:translate(0,0)}
+25%{transform:translate(4px,-6px)}
+50%{transform:translate(-3px,-10px)}
+75%{transform:translate(6px,-3px)}
+100%{transform:translate(0,0)}
+}
 
-    @keyframes starDrift{
-      0%{
-        transform:translateY(0) translateX(0);
-      }
-      25%{
-        transform:translateY(-6px) translateX(4px);
-      }
-      50%{
-        transform:translateY(-10px) translateX(-3px);
-      }
-      75%{
-        transform:translateY(-4px) translateX(5px);
-      }
-      100%{
-        transform:translateY(0) translateX(0);
-      }
-    }
+/* الشهاب */
 
-    .float-symbol{
-      position:absolute;
-      color:rgba(255,255,255,0.08);
-      font-weight:700;
-      font-family:'Caveat', cursive;
-      user-select:none;
-      white-space:nowrap;
-      animation:floatSlow linear infinite;
-      opacity:0;
-      text-shadow:0 0 4px rgba(255,255,255,0.03);
-    }
+.meteor{
+position:absolute;
+width:250px;
+height:3px;
 
-    .float-symbol.glow{
-      color:rgba(125,211,252,0.22);
-      text-shadow:
-        0 0 4px rgba(125,211,252,0.14),
-        0 0 10px rgba(56,189,248,0.12),
-        0 0 18px rgba(37,99,235,0.08);
-    }
+background:linear-gradient(
+90deg,
+rgba(255,255,255,1),
+rgba(255,255,255,.8),
+rgba(255,255,255,.3),
+transparent
+);
 
-    @keyframes floatSlow{
-      0%{
-        transform:translateY(110vh) rotate(0deg);
-        opacity:0;
-      }
-      8%{
-        opacity:0.32;
-      }
-      55%{
-        opacity:0.42;
-      }
-      100%{
-        transform:translateY(-10vh) rotate(7deg);
-        opacity:0;
-      }
-    }
+filter:blur(.4px);
 
-    .card{
-      position:relative;
-      z-index:2;
-      width:100%;
-      max-width:560px;
-      background:rgba(6,10,16,0.92);
-      backdrop-filter:blur(14px);
-      border:1px solid rgba(255,255,255,0.05);
-      border-radius:28px;
-      padding:34px 28px;
-      box-shadow:
-        0 20px 60px rgba(0,0,0,0.28),
-        inset 0 1px 0 rgba(255,255,255,0.04);
-    }
+box-shadow:
+0 0 10px rgba(255,255,255,.9),
+0 0 25px rgba(255,255,255,.7),
+0 0 50px rgba(120,180,255,.5);
 
-    .welcome{
-      font-size:36px;
-      font-weight:800;
-      margin:0 0 8px;
-      color:#f4ede3;
-      text-align:center;
-    }
+transform:rotate(-25deg);
 
-    .sub{
-      font-size:26px;
-      font-weight:500;
-      margin:0 0 28px;
-      color:#c8baa6;
-      text-align:center;
-    }
+animation:meteorMove 2.2s linear forwards;
+}
 
-    .field{
-      margin-bottom:18px;
-    }
+@keyframes meteorMove{
 
-    label{
-      display:block;
-      font-size:15px;
-      font-weight:700;
-      color:#f2e7d8;
-      margin-bottom:8px;
-    }
+0%{
+transform:translate(-300px,-200px) rotate(-25deg);
+opacity:0
+}
 
-    select{
-      width:100%;
-      padding:14px 16px;
-      border-radius:16px;
-      border:1px solid #0b5cd6;
-      background:rgba(18,20,26,0.60);
-      font-size:16px;
-      font-family:'Tajawal',sans-serif;
-      outline:none;
-      transition:0.2s ease;
-      color:#f5efe6;
-    }
+10%{opacity:1}
 
-    select:focus{
-      border-color:#38bdf8;
-      box-shadow:0 0 0 4px rgba(56,189,248,0.12);
-      background:rgba(18,20,26,0.85);
-    }
+100%{
+transform:translate(120vw,70vh) rotate(-25deg);
+opacity:0
+}
 
-    .drop-zone{
-      border:2px dashed #0b6cf0;
-      border-radius:20px;
-      padding:28px 18px;
-      text-align:center;
-      cursor:pointer;
-      background:rgba(18,20,26,0.50);
-      transition:0.25s ease;
-      position:relative;
-      overflow:hidden;
-    }
+}
 
-    .drop-zone::before{
-      content:"";
-      position:absolute;
-      inset:0;
-      background:linear-gradient(120deg, transparent, rgba(255,255,255,0.03), transparent);
-      transform:translateX(-100%);
-      transition:0.5s ease;
-    }
+/* البطاقة */
 
-    .drop-zone:hover{
-      background:rgba(21,28,42,0.78);
-      border-color:#2ea9ff;
-      box-shadow:0 0 25px rgba(28,105,255,0.10);
-    }
+.card{
+position:relative;
+z-index:2;
+width:560px;
+max-width:90%;
 
-    .drop-zone:hover::before{
-      transform:translateX(100%);
-    }
+background:rgba(6,10,16,.92);
+backdrop-filter:blur(14px);
 
-    .drop-zone.dragover{
-      background:rgba(21,28,42,0.92);
-      border-color:#38bdf8;
-      transform:scale(1.01);
-      box-shadow:0 0 30px rgba(56,189,248,0.15);
-    }
+border-radius:28px;
+padding:36px;
 
-    .drop-zone p{
-      margin:0 0 8px;
-      font-weight:800;
-      font-size:18px;
-      color:#f5efe6;
-    }
+border:1px solid rgba(255,255,255,.05);
 
-    .drop-zone span{
-      display:block;
-      font-size:14px;
-      color:#c7b9a7;
-      margin-bottom:12px;
-    }
+box-shadow:
+0 20px 60px rgba(0,0,0,.5),
+inset 0 1px 0 rgba(255,255,255,.05);
+}
 
-    .file-name{
-      margin-top:10px;
-      font-size:14px;
-      color:#57b9ff;
-      font-weight:700;
-      word-break:break-word;
-    }
+.welcome{
+font-size:36px;
+font-weight:800;
+color:#f5efe6;
+text-align:center;
+margin:0
+}
 
-    button{
-      width:100%;
-      border:none;
-      border-radius:18px;
-      padding:16px;
-      font-size:18px;
-      font-weight:800;
-      font-family:'Tajawal',sans-serif;
-      cursor:pointer;
-      color:#fff;
-      background:linear-gradient(135deg,#18b7df 0%, #2e67f0 55%, #5320d6 100%);
-      box-shadow:0 14px 30px rgba(37,99,235,0.28);
-      transition:transform 0.18s ease, box-shadow 0.18s ease;
-    }
+.sub{
+text-align:center;
+color:#c6b9a7;
+font-size:22px;
+margin-bottom:28px
+}
 
-    button:hover{
-      transform:translateY(-2px);
-      box-shadow:0 18px 34px rgba(37,99,235,0.32);
-    }
+.field{margin-bottom:18px}
 
-    .note{
-      margin-top:14px;
-      text-align:center;
-      font-size:14px;
-      color:#b8ab97;
-    }
+label{
+display:block;
+margin-bottom:6px;
+color:#eee
+}
 
-    @media (max-width:900px){
-      .eq{
-        font-size:11px !important;
-      }
-      .panel-line,
-      .mini-chart,
-      .mini-ring,
-      .mini-axis{
-        opacity:0.08;
-      }
-    }
+select{
+width:100%;
+padding:14px;
+border-radius:14px;
+border:1px solid #0b5cd6;
+background:#111824;
+color:#fff;
+}
 
-    @media (max-width:640px){
-      .card{
-        padding:28px 18px;
-        border-radius:24px;
-      }
+.drop-zone{
+border:2px dashed #0b6cf0;
+border-radius:18px;
+padding:28px;
+text-align:center;
+background:#0f1622;
+cursor:pointer
+}
 
-      .welcome{
-        font-size:30px;
-      }
+button{
+width:100%;
+margin-top:12px;
+border:none;
+padding:16px;
+border-radius:18px;
+font-weight:800;
+font-size:18px;
+color:#fff;
 
-      .sub{
-        font-size:21px;
-      }
-    }
-  </style>
+background:linear-gradient(135deg,#18b7df,#2e67f0,#5320d6);
+}
+
+.note{
+text-align:center;
+margin-top:12px;
+color:#a9a091
+}
+
+</style>
 </head>
+
 <body>
 
-  <div class="dashboard-bg" id="dashboardBg">
-    <div class="bg-noise"></div>
-    <div class="data-grid"></div>
-    <div class="grid-glow"></div>
+<div class="dashboard-bg" id="dashboardBg">
 
-    <div class="panel-line panel-1"></div>
-    <div class="panel-line panel-2"></div>
-    <div class="panel-line panel-3"></div>
-    <div class="panel-line panel-4"></div>
+<div class="data-grid"></div>
 
-    <div class="mini-chart">
-      <svg viewBox="0 0 180 90" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <line x1="10" y1="45" x2="170" y2="45" stroke="rgba(125,211,252,0.12)" stroke-width="1.4"/>
-        <line x1="90" y1="8" x2="90" y2="82" stroke="rgba(125,211,252,0.12)" stroke-width="1.4"/>
-        <path d="M10 45 C28 26, 50 24, 68 45 S104 67, 122 45 S150 20, 170 45"
-              stroke="rgba(125,211,252,0.16)" stroke-width="1.8" fill="none" stroke-linecap="round"/>
-      </svg>
-    </div>
+</div>
 
-    <div class="mini-ring">
-      <svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="60" cy="60" r="35" stroke="rgba(125,211,252,0.14)" stroke-width="2"/>
-        <line x1="10" y1="60" x2="110" y2="60" stroke="rgba(125,211,252,0.08)" stroke-width="1.5"/>
-        <line x1="60" y1="10" x2="60" y2="110" stroke="rgba(125,211,252,0.08)" stroke-width="1.5"/>
-      </svg>
-    </div>
 
-    <div class="mini-axis">
-      <svg viewBox="0 0 100 78" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <line x1="10" y1="39" x2="90" y2="39" stroke="rgba(125,211,252,0.07)" stroke-width="1.4"/>
-        <line x1="50" y1="10" x2="50" y2="68" stroke="rgba(125,211,252,0.07)" stroke-width="1.4"/>
-      </svg>
-    </div>
-  </div>
+<div class="card">
 
-  <div class="card">
-    <p class="welcome">ارحب مشعل</p>
-    <p class="sub">يوسف موصيني عليك و انا بخدمتك</p>
+<p class="welcome">ارحب مشعل</p>
+<p class="sub">يوسف موصيني عليك و انا بخدمتك</p>
 
-    <div class="field">
-      <label for="pdfFile">رفع الملف</label>
-      <div class="drop-zone" id="dropZone">
-        <p>اسحب ملف PDF هنا</p>
-        <span>أو اضغط لاختيار الملف</span>
-        <input id="pdfFile" type="file" accept=".pdf" hidden>
-        <div class="file-name" id="fileName">لم يتم اختيار ملف بعد</div>
-      </div>
-    </div>
+<div class="field">
+<label>رفع الملف</label>
+<div class="drop-zone">اسحب ملف PDF هنا</div>
+</div>
 
-    <div class="field">
-      <label for="questionCount">عدد الأسئلة</label>
-      <select id="questionCount">
-        <option>5</option>
-        <option>10</option>
-        <option>15</option>
-        <option>20</option>
-      </select>
-    </div>
+<div class="field">
+<label>عدد الأسئلة</label>
+<select>
+<option>5</option>
+<option>10</option>
+<option>15</option>
+<option>20</option>
+</select>
+</div>
 
-    <div class="field">
-      <label for="questionType">نوع الأسئلة</label>
-      <select id="questionType">
-        <option>مقالية</option>
-        <option>اختيار من متعدد</option>
-        <option>مقالية + اختيار من متعدد</option>
-        <option>مسائل رياضية</option>
-        <option>الكل</option>
-      </select>
-    </div>
+<div class="field">
+<label>نوع الأسئلة</label>
+<select>
+<option>مقالية</option>
+<option>اختيار من متعدد</option>
+<option>مقالية + اختيار من متعدد</option>
+<option>مسائل رياضية</option>
+</select>
+</div>
 
-    <button type="button">توليد الأسئلة</button>
-    <div class="note">النسخة الحالية واجهة أولية، وسيتم لاحقًا ربطها بقراءة الملف وتوليد الأسئلة منه.</div>
-  </div>
+<button>توليد الأسئلة</button>
 
-  <script>
-    const dropZone = document.getElementById("dropZone");
-    const fileInput = document.getElementById("pdfFile");
-    const fileName = document.getElementById("fileName");
+<div class="note">
+النسخة الحالية واجهة أولية
+</div>
 
-    dropZone.addEventListener("click", () => fileInput.click());
+</div>
 
-    fileInput.addEventListener("change", () => {
-      fileName.textContent = fileInput.files.length ? fileInput.files[0].name : "لم يتم اختيار ملف بعد";
-    });
 
-    dropZone.addEventListener("dragover", (e) => {
-      e.preventDefault();
-      dropZone.classList.add("dragover");
-    });
+<script>
 
-    dropZone.addEventListener("dragleave", () => {
-      dropZone.classList.remove("dragover");
-    });
+const bg=document.getElementById("dashboardBg")
 
-    dropZone.addEventListener("drop", (e) => {
-      e.preventDefault();
-      dropZone.classList.remove("dragover");
-      if (e.dataTransfer.files.length > 0) {
-        fileInput.files = e.dataTransfer.files;
-        fileName.textContent = e.dataTransfer.files[0].name;
-      }
-    });
+/* المعادلات */
 
-    const dashboardBg = document.getElementById("dashboardBg");
+const formulas=[
+"x²+y²=r²",
+"sin²x+cos²x=1",
+"π≈3.14",
+"dy/dx",
+"∑n",
+"∫f(x)",
+"f(x)",
+"x²",
+"y²",
+"log(x)",
+"tanθ",
+"λ",
+"µ+σ",
+"A=Lw"
+]
 
-    const formulas = [
-      "n = ∑ Cₖ xⁿ⁻ᵏ yᵏ",
-      "x² + y² = r²",
-      "sin²x + cos²x = 1",
-      "π ≈ 3.14",
-      "y = ax² + bx + c",
-      "dy/dx",
-      "∫ f(x) dx",
-      "log(a/b)",
-      "P(A)",
-      "µ + σ",
-      "x²",
-      "y²",
-      "tan θ",
-      "f(x)",
-      "x/2 + y/3",
-      "a²+b²",
-      "a³+b³",
-      "∞",
-      "λy",
-      "∂/∂x",
-      "log x",
-      "sin x",
-      "cos x",
-      "tan x",
-      "∇f",
-      "σ²",
-      "P(B)",
-      "x+y",
-      "x−y",
-      "√2",
-      "∑n",
-      "kλ",
-      "x/4",
-      "f’(x)",
-      "A=Lw"
-    ];
+function createFormula(){
 
-    function createFormula() {
-      const el = document.createElement("span");
+let el=document.createElement("span")
 
-      const glowChance = Math.random() > 0.975;
-      const variantChance = Math.random();
+el.className="eq"
 
-      if (glowChance) {
-        el.className = "eq eq-strong";
-        el.style.color = "rgba(125,211,252,0.14)";
-      } else if (variantChance > 0.7) {
-        el.className = "eq eq-strong";
-      } else if (variantChance > 0.35) {
-        el.className = "eq eq-mid";
-      } else {
-        el.className = "eq eq-soft";
-      }
+el.textContent=formulas[Math.floor(Math.random()*formulas.length)]
 
-      el.textContent = formulas[Math.floor(Math.random() * formulas.length)];
-      el.style.left = Math.random() * 100 + "vw";
-      el.style.top = Math.random() * 100 + "vh";
-      el.style.fontSize = (6 + Math.random() * 7) + "px";
-      el.style.transform = "rotate(" + (Math.random() * 16 - 8) + "deg)";
+el.style.left=Math.random()*100+"vw"
+el.style.top=Math.random()*100+"vh"
 
-      dashboardBg.appendChild(el);
-    }
+el.style.fontSize=(6+Math.random()*8)+"px"
 
-    for (let i = 0; i < 2600; i++) {
-      createFormula();
-    }
+el.style.transform="rotate("+(Math.random()*20-10)+"deg)"
 
-    function createStar() {
-      const star = document.createElement("span");
-      star.className = "data-star";
-      star.style.left = Math.random() * 100 + "vw";
-      star.style.top = Math.random() * 100 + "vh";
+bg.appendChild(el)
 
-      const size = 2 + Math.random() * 3.8;
-      star.style.width = size + "px";
-      star.style.height = size + "px";
+}
 
-      const pulseDuration = (1.4 + Math.random() * 1.8) + "s";
-      const driftDuration = (6 + Math.random() * 8) + "s";
-      star.style.animationDuration = `${pulseDuration}, ${driftDuration}`;
+for(let i=0;i<2600;i++) createFormula()
 
-      dashboardBg.appendChild(star);
-    }
 
-    for (let i = 0; i < 420; i++) {
-      createStar();
-    }
 
-    const floatSymbols = [
-      "+","-","×","÷","=","√","∑","π","∞","∆","∂","θ","λ","x²","y²","f(x)","dy/dx","log","sin","cos","tan","μ","σ"
-    ];
+/* النجوم */
 
-    function createFloatSymbol() {
-      const el = document.createElement("span");
-      const isGlow = Math.random() > 0.82;
-      el.className = isGlow ? "float-symbol glow" : "float-symbol";
-      el.textContent = floatSymbols[Math.floor(Math.random() * floatSymbols.length)];
-      el.style.left = Math.random() * 100 + "vw";
-      el.style.top = (100 + Math.random() * 5) + "vh";
-      el.style.fontSize = (5 + Math.random() * 4) + "px";
-      el.style.animationDuration = (16 + Math.random() * 10) + "s";
+function createStar(){
 
-      dashboardBg.appendChild(el);
+let star=document.createElement("span")
 
-      setTimeout(() => {
-        el.remove();
-      }, 30000);
-    }
+star.className="data-star"
 
-    for (let i = 0; i < 420; i++) {
-      setTimeout(createFloatSymbol, i * 20);
-    }
+star.style.left=Math.random()*100+"vw"
+star.style.top=Math.random()*100+"vh"
 
-    setInterval(createFloatSymbol, 55);
-  </script>
+let size=2+Math.random()*4
+
+star.style.width=size+"px"
+star.style.height=size+"px"
+
+bg.appendChild(star)
+
+}
+
+for(let i=0;i<450;i++) createStar()
+
+
+
+/* الشهاب */
+
+function createMeteor(){
+
+let meteor=document.createElement("div")
+
+meteor.className="meteor"
+
+meteor.style.top=Math.random()*40+"vh"
+
+bg.appendChild(meteor)
+
+setTimeout(()=>{
+meteor.remove()
+},2500)
+
+}
+
+/* شهاب كل فترة */
+
+setInterval(createMeteor,9000)
+
+</script>
 
 </body>
 </html>
