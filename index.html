@@ -44,7 +44,7 @@
       font-size:36px;
       font-weight:800;
       margin:0 0 8px;
-      color:#64748b;
+      color:#111827;
       text-align:center;
     }
 
@@ -52,7 +52,7 @@
       font-size:26px;
       font-weight:500;
       margin:0 0 28px;
-      color:#475569;
+      color:#64748b;
       text-align:center;
     }
 
@@ -68,7 +68,6 @@
       margin-bottom:8px;
     }
 
-    input[type="file"],
     select{
       width:100%;
       padding:14px 16px;
@@ -79,13 +78,58 @@
       font-family:'Tajawal',sans-serif;
       outline:none;
       transition:0.2s ease;
+      color:#0f172a;
     }
 
-    input[type="file"]:focus,
     select:focus{
       border-color:#38bdf8;
       box-shadow:0 0 0 4px rgba(56,189,248,0.16);
       background:#fff;
+    }
+
+    .drop-zone{
+      border:2px dashed #3b82f6;
+      border-radius:20px;
+      padding:28px 18px;
+      text-align:center;
+      cursor:pointer;
+      background:#f8fafc;
+      transition:0.2s ease;
+      position:relative;
+      overflow:hidden;
+    }
+
+    .drop-zone:hover{
+      background:#eef6ff;
+      border-color:#2563eb;
+    }
+
+    .drop-zone.dragover{
+      background:#eef6ff;
+      border-color:#2563eb;
+      transform:scale(1.01);
+    }
+
+    .drop-zone p{
+      margin:0 0 8px;
+      font-weight:800;
+      font-size:18px;
+      color:#0f172a;
+    }
+
+    .drop-zone span{
+      display:block;
+      font-size:14px;
+      color:#64748b;
+      margin-bottom:12px;
+    }
+
+    .file-name{
+      margin-top:10px;
+      font-size:14px;
+      color:#2563eb;
+      font-weight:700;
+      word-break:break-word;
     }
 
     button{
@@ -126,7 +170,7 @@
       }
 
       .sub{
-        font-size:25px;
+        font-size:21px;
       }
     }
   </style>
@@ -139,7 +183,13 @@
 
     <div class="field">
       <label for="pdfFile">رفع الملف</label>
-      <input id="pdfFile" type="file" accept=".pdf">
+
+      <div class="drop-zone" id="dropZone">
+        <p>اسحب ملف PDF هنا</p>
+        <span>أو اضغط لاختيار الملف</span>
+        <input id="pdfFile" type="file" accept=".pdf" hidden>
+        <div class="file-name" id="fileName">لم يتم اختيار ملف بعد</div>
+      </div>
     </div>
 
     <div class="field">
@@ -167,6 +217,43 @@
 
     <div class="note">النسخة الحالية واجهة أولية، وسيتم لاحقًا ربطها بقراءة الملف وتوليد الأسئلة منه.</div>
   </div>
+
+  <script>
+    const dropZone = document.getElementById("dropZone");
+    const fileInput = document.getElementById("pdfFile");
+    const fileName = document.getElementById("fileName");
+
+    dropZone.addEventListener("click", () => {
+      fileInput.click();
+    });
+
+    fileInput.addEventListener("change", () => {
+      if (fileInput.files.length > 0) {
+        fileName.textContent = fileInput.files[0].name;
+      } else {
+        fileName.textContent = "لم يتم اختيار ملف بعد";
+      }
+    });
+
+    dropZone.addEventListener("dragover", (e) => {
+      e.preventDefault();
+      dropZone.classList.add("dragover");
+    });
+
+    dropZone.addEventListener("dragleave", () => {
+      dropZone.classList.remove("dragover");
+    });
+
+    dropZone.addEventListener("drop", (e) => {
+      e.preventDefault();
+      dropZone.classList.remove("dragover");
+
+      if (e.dataTransfer.files.length > 0) {
+        fileInput.files = e.dataTransfer.files;
+        fileName.textContent = e.dataTransfer.files[0].name;
+      }
+    });
+  </script>
 
 </body>
 </html>
