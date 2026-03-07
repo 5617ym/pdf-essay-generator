@@ -25,12 +25,11 @@
       overflow:hidden;
       position:relative;
       background:
-        radial-gradient(circle at 18% 22%, rgba(34,211,238,0.16), transparent 24%),
-        radial-gradient(circle at 82% 78%, rgba(139,92,246,0.16), transparent 24%),
+        radial-gradient(circle at 18% 22%, rgba(34,211,238,0.18), transparent 24%),
+        radial-gradient(circle at 82% 78%, rgba(139,92,246,0.18), transparent 24%),
         linear-gradient(135deg, #06101d 0%, #0a1730 42%, #121b46 100%);
     }
 
-    /* الخلفية الرياضية */
     .math-bg{
       position:fixed;
       inset:0;
@@ -39,32 +38,33 @@
       overflow:hidden;
     }
 
-    /* طبقة ثابتة خفيفة حتى يظهر الطابع الرياضي دائمًا */
+    /* طبقة ثابتة خفيفة */
     .math-overlay{
       position:absolute;
       inset:0;
-      opacity:0.14;
+      opacity:0.16;
       background-image:
-        radial-gradient(circle at 12% 18%, rgba(255,255,255,0.08) 0 1px, transparent 1px),
-        radial-gradient(circle at 86% 20%, rgba(255,255,255,0.06) 0 1px, transparent 1px),
-        radial-gradient(circle at 25% 72%, rgba(255,255,255,0.05) 0 1px, transparent 1px);
-      background-size: 280px 280px, 340px 340px, 220px 220px;
+        radial-gradient(circle at 10% 18%, rgba(255,255,255,0.06) 0 1px, transparent 1px),
+        radial-gradient(circle at 80% 22%, rgba(255,255,255,0.05) 0 1px, transparent 1px),
+        radial-gradient(circle at 30% 78%, rgba(255,255,255,0.05) 0 1px, transparent 1px),
+        radial-gradient(circle at 72% 70%, rgba(255,255,255,0.05) 0 1px, transparent 1px);
+      background-size: 220px 220px, 300px 300px, 260px 260px, 240px 240px;
     }
 
     .equation-line{
       position:absolute;
-      color:rgba(160, 210, 255, 0.11);
+      color:rgba(160, 210, 255, 0.14);
       font-size:18px;
       font-weight:700;
       letter-spacing:1px;
       white-space:nowrap;
-      text-shadow:0 0 10px rgba(59,130,246,0.08);
+      text-shadow:0 0 12px rgba(59,130,246,0.10);
     }
 
-    .eq1{ top:12%; left:6%; transform:rotate(-7deg); }
-    .eq2{ top:22%; right:8%; transform:rotate(5deg); }
-    .eq3{ bottom:18%; left:10%; transform:rotate(6deg); }
-    .eq4{ bottom:10%; right:12%; transform:rotate(-5deg); }
+    .eq1{ top:10%; left:6%; transform:rotate(-7deg); }
+    .eq2{ top:20%; right:7%; transform:rotate(5deg); }
+    .eq3{ bottom:16%; left:8%; transform:rotate(6deg); }
+    .eq4{ bottom:8%; right:10%; transform:rotate(-5deg); }
 
     .math-symbol{
       position:absolute;
@@ -73,29 +73,33 @@
       white-space:nowrap;
       opacity:0;
       animation:floatUp linear infinite;
-      text-shadow:0 0 12px rgba(59,130,246,0.20);
-      filter:drop-shadow(0 0 6px rgba(59,130,246,0.08));
+      text-shadow:0 0 14px rgba(59,130,246,0.20);
+      filter:drop-shadow(0 0 6px rgba(59,130,246,0.10));
     }
 
-    .math-blue{ color:rgba(125, 211, 252, 0.34); }
-    .math-cyan{ color:rgba(34, 211, 238, 0.30); }
-    .math-purple{ color:rgba(167, 139, 250, 0.28); }
-    .math-soft{ color:rgba(255,255,255,0.18); }
+    .math-blue{ color:rgba(125, 211, 252, 0.42); }
+    .math-cyan{ color:rgba(34, 211, 238, 0.40); }
+    .math-purple{ color:rgba(167, 139, 250, 0.36); }
+    .math-soft{ color:rgba(255,255,255,0.24); }
 
     @keyframes floatUp{
       0%{
-        transform:translateY(110vh) translateX(0) rotate(0deg) scale(0.92);
+        transform:translateY(110vh) translateX(0) rotate(0deg) scale(0.95);
         opacity:0;
       }
-      10%{
+      8%{
         opacity:0.9;
       }
-      50%{
-        transform:translateY(45vh) translateX(12px) rotate(7deg) scale(1);
+      30%{
+        transform:translateY(75vh) translateX(8px) rotate(4deg) scale(1);
+        opacity:1;
+      }
+      65%{
+        transform:translateY(35vh) translateX(-6px) rotate(8deg) scale(1.03);
         opacity:1;
       }
       100%{
-        transform:translateY(-18vh) translateX(-10px) rotate(14deg) scale(1.04);
+        transform:translateY(-18vh) translateX(10px) rotate(14deg) scale(1.06);
         opacity:0;
       }
     }
@@ -361,18 +365,18 @@
       el.textContent = symbols[Math.floor(Math.random() * symbols.length)];
       el.style.left = Math.random() * 100 + "vw";
       el.style.top = (100 + Math.random() * 18) + "vh";
-      el.style.fontSize = (14 + Math.random() * 18) + "px";
-      el.style.animationDuration = (10 + Math.random() * 10) + "s";
+      el.style.fontSize = (16 + Math.random() * 20) + "px";
+      el.style.animationDuration = (18 + Math.random() * 10) + "s";
       mathBg.appendChild(el);
 
-      setTimeout(() => el.remove(), 22000);
+      setTimeout(() => el.remove(), 32000);
     }
 
-    for (let i = 0; i < 120; i++) {
-      setTimeout(createSymbol, i * 80);
+    for (let i = 0; i < 220; i++) {
+      setTimeout(createSymbol, i * 70);
     }
 
-    setInterval(createSymbol, 180);
+    setInterval(createSymbol, 120);
   </script>
 
 </body>
