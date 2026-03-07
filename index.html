@@ -10,14 +10,19 @@
   <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&family=Caveat:wght@500;700&display=swap" rel="stylesheet">
 
   <style>
-    *{
-      box-sizing:border-box;
-    }
+    *{ box-sizing:border-box; }
 
     :root{
       --bg-1:#05070b;
       --bg-2:#070b12;
       --bg-3:#0a1019;
+      --panel:rgba(9,15,24,0.34);
+      --panel-border:rgba(89,130,220,0.11);
+      --cyan:#7dd3fc;
+      --blue:#3b82f6;
+      --white:rgba(255,255,255,0.88);
+      --soft-white:rgba(255,255,255,0.42);
+      --muted:rgba(255,255,255,0.18);
     }
 
     body{
@@ -65,7 +70,7 @@
         linear-gradient(rgba(52, 87, 138, 0.06) 1px, transparent 1px),
         linear-gradient(90deg, rgba(52, 87, 138, 0.06) 1px, transparent 1px);
       background-size: 44px 44px;
-      opacity:0.13;
+      opacity:0.14;
       z-index:1;
     }
 
@@ -76,38 +81,6 @@
         linear-gradient(90deg, transparent 0%, rgba(37,99,235,0.04) 25%, transparent 50%, rgba(56,189,248,0.04) 75%, transparent 100%);
       opacity:0.20;
       z-index:1;
-    }
-
-    .panel-line{
-      position:absolute;
-      border:1px solid rgba(47, 86, 150, 0.08);
-      border-radius:16px;
-      box-shadow:inset 0 0 25px rgba(37,99,235,0.015);
-      z-index:1;
-    }
-
-    .panel-1{ top:7%; left:4%; width:23%; height:22%; }
-    .panel-2{ top:10%; right:4%; width:21%; height:20%; }
-    .panel-3{ bottom:9%; left:5%; width:25%; height:24%; }
-    .panel-4{ bottom:8%; right:4%; width:24%; height:23%; }
-
-    .mini-chart,
-    .mini-ring,
-    .mini-axis{
-      position:absolute;
-      opacity:0.10;
-      z-index:1;
-    }
-
-    .mini-chart{ top:18%; left:54%; width:180px; height:90px; }
-    .mini-ring{ right:8%; bottom:10%; width:120px; height:120px; }
-    .mini-axis{ bottom:16%; left:33%; width:100px; height:78px; }
-
-    .mini-chart svg,
-    .mini-ring svg,
-    .mini-axis svg{
-      width:100%;
-      height:100%;
     }
 
     .numbers-layer{
@@ -125,22 +98,21 @@
       line-height:1;
       letter-spacing:0.2px;
       mix-blend-mode:screen;
-      color:rgba(255,255,255,0.07);
+      color:rgba(255,255,255,0.06);
       text-shadow:0 0 2px rgba(255,255,255,0.02);
     }
 
-    .num-soft{ color:rgba(255,255,255,0.04); }
-    .num-mid{ color:rgba(255,255,255,0.07); }
-    .num-strong{ color:rgba(255,255,255,0.11); }
-
+    .num-soft{ color:rgba(255,255,255,0.03); }
+    .num-mid{ color:rgba(255,255,255,0.06); }
+    .num-strong{ color:rgba(255,255,255,0.10); }
     .num-star{
       color:#ffffff;
       text-shadow:
         0 0 6px rgba(255,255,255,1),
         0 0 12px rgba(255,255,255,0.95),
-        0 0 22px rgba(255,255,255,0.62),
-        0 0 34px rgba(180,230,255,0.34);
-      opacity:0.98;
+        0 0 22px rgba(255,255,255,0.55),
+        0 0 34px rgba(180,230,255,0.28);
+      opacity:0.95;
     }
 
     .network-layer{
@@ -155,6 +127,187 @@
       width:100%;
       height:100%;
       opacity:0.55;
+    }
+
+    /* شاشات البيانات */
+    .data-screens{
+      position:absolute;
+      inset:0;
+      z-index:4;
+    }
+
+    .screen{
+      position:absolute;
+      background:var(--panel);
+      border:1px solid var(--panel-border);
+      border-radius:18px;
+      backdrop-filter:blur(8px);
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,0.03),
+        0 0 30px rgba(31,88,214,0.05);
+      overflow:hidden;
+    }
+
+    .screen::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:linear-gradient(180deg, rgba(255,255,255,0.025), transparent 28%);
+      pointer-events:none;
+    }
+
+    .screen::after{
+      content:"";
+      position:absolute;
+      left:-35%;
+      top:0;
+      width:40%;
+      height:100%;
+      background:linear-gradient(90deg, transparent, rgba(255,255,255,0.06), transparent);
+      transform:skewX(-18deg);
+      animation:screenSweep 8s linear infinite;
+      pointer-events:none;
+    }
+
+    @keyframes screenSweep{
+      0%{ left:-45%; }
+      100%{ left:120%; }
+    }
+
+    .screen-1{ top:8%; left:5%; width:320px; height:180px; }
+    .screen-2{ top:14%; right:4%; width:300px; height:165px; }
+    .screen-3{ bottom:9%; left:6%; width:340px; height:190px; }
+    .screen-4{ bottom:10%; right:5%; width:320px; height:180px; }
+
+    .screen-inner{
+      position:absolute;
+      inset:0;
+      padding:14px 16px;
+    }
+
+    .screen-title{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      font-size:12px;
+      color:rgba(255,255,255,0.58);
+      margin-bottom:10px;
+    }
+
+    .screen-title .dot{
+      width:7px;
+      height:7px;
+      border-radius:50%;
+      background:#9ae6ff;
+      box-shadow:0 0 10px rgba(154,230,255,0.55);
+    }
+
+    .metrics{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:8px;
+      margin-bottom:10px;
+    }
+
+    .metric{
+      background:rgba(255,255,255,0.025);
+      border:1px solid rgba(255,255,255,0.04);
+      border-radius:12px;
+      padding:8px 8px 9px;
+      min-height:52px;
+    }
+
+    .metric-label{
+      font-size:10px;
+      color:rgba(255,255,255,0.42);
+      margin-bottom:4px;
+    }
+
+    .metric-value{
+      font-size:16px;
+      font-weight:800;
+      color:rgba(255,255,255,0.92);
+      text-shadow:0 0 10px rgba(125,211,252,0.08);
+    }
+
+    .metric-change{
+      font-size:10px;
+      color:rgba(125,211,252,0.78);
+      margin-top:2px;
+    }
+
+    .bars{
+      display:grid;
+      gap:8px;
+      margin-top:8px;
+    }
+
+    .bar-row{
+      display:grid;
+      grid-template-columns:44px 1fr 40px;
+      gap:8px;
+      align-items:center;
+      font-size:10px;
+      color:rgba(255,255,255,0.42);
+    }
+
+    .bar-track{
+      height:6px;
+      border-radius:999px;
+      background:rgba(255,255,255,0.05);
+      overflow:hidden;
+      position:relative;
+    }
+
+    .bar-fill{
+      height:100%;
+      border-radius:999px;
+      background:linear-gradient(90deg, rgba(24,183,223,0.85), rgba(46,103,240,0.92), rgba(83,32,214,0.88));
+      box-shadow:0 0 10px rgba(46,103,240,0.22);
+      animation:barPulse 3.5s ease-in-out infinite;
+      transform-origin:left center;
+    }
+
+    @keyframes barPulse{
+      0%,100%{ filter:brightness(0.95); }
+      50%{ filter:brightness(1.15); }
+    }
+
+    .mini-svg{
+      width:100%;
+      height:56px;
+      display:block;
+      margin-top:4px;
+      opacity:0.95;
+    }
+
+    .ticker{
+      margin-top:8px;
+      display:flex;
+      gap:12px;
+      white-space:nowrap;
+      color:rgba(255,255,255,0.46);
+      font-size:11px;
+      animation:tickerMove 14s linear infinite;
+      width:max-content;
+    }
+
+    @keyframes tickerMove{
+      0%{ transform:translateX(0); }
+      100%{ transform:translateX(-32%); }
+    }
+
+    .pulse-line{
+      position:absolute;
+      inset:auto 0 0 0;
+      height:1px;
+      background:linear-gradient(90deg, transparent, rgba(125,211,252,0.35), transparent);
+      animation:lineBlink 2.8s ease-in-out infinite;
+    }
+
+    @keyframes lineBlink{
+      0%,100%{ opacity:0.35; }
+      50%{ opacity:0.9; }
     }
 
     .card{
@@ -306,15 +459,16 @@
       color:#b8ab97;
     }
 
+    @media (max-width:1200px){
+      .screen{ opacity:0.78; transform:scale(0.92); }
+    }
+
     @media (max-width:900px){
+      .screen{
+        display:none;
+      }
       .bg-num{
         font-size:11px !important;
-      }
-      .panel-line,
-      .mini-chart,
-      .mini-ring,
-      .mini-axis{
-        opacity:0.07;
       }
     }
 
@@ -335,37 +489,193 @@
     <div class="data-grid"></div>
     <div class="grid-glow"></div>
 
-    <div class="panel-line panel-1"></div>
-    <div class="panel-line panel-2"></div>
-    <div class="panel-line panel-3"></div>
-    <div class="panel-line panel-4"></div>
-
-    <div class="mini-chart">
-      <svg viewBox="0 0 180 90" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <line x1="10" y1="45" x2="170" y2="45" stroke="rgba(125,211,252,0.10)" stroke-width="1.3"/>
-        <line x1="90" y1="8" x2="90" y2="82" stroke="rgba(125,211,252,0.10)" stroke-width="1.3"/>
-        <path d="M10 45 C28 26, 50 24, 68 45 S104 67, 122 45 S150 20, 170 45"
-              stroke="rgba(125,211,252,0.13)" stroke-width="1.6" fill="none" stroke-linecap="round"/>
-      </svg>
-    </div>
-
-    <div class="mini-ring">
-      <svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="60" cy="60" r="35" stroke="rgba(125,211,252,0.12)" stroke-width="2"/>
-        <line x1="10" y1="60" x2="110" y2="60" stroke="rgba(125,211,252,0.07)" stroke-width="1.4"/>
-        <line x1="60" y1="10" x2="60" y2="110" stroke="rgba(125,211,252,0.07)" stroke-width="1.4"/>
-      </svg>
-    </div>
-
-    <div class="mini-axis">
-      <svg viewBox="0 0 100 78" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <line x1="10" y1="39" x2="90" y2="39" stroke="rgba(125,211,252,0.06)" stroke-width="1.3"/>
-        <line x1="50" y1="10" x2="50" y2="68" stroke="rgba(125,211,252,0.06)" stroke-width="1.3"/>
-      </svg>
-    </div>
-
     <div class="numbers-layer" id="numbersLayer"></div>
     <div class="network-layer"><canvas id="networkCanvas"></canvas></div>
+
+    <div class="data-screens">
+      <div class="screen screen-1">
+        <div class="screen-inner">
+          <div class="screen-title">
+            <span>Data Monitor / Stream A</span>
+            <span class="dot"></span>
+          </div>
+
+          <div class="metrics">
+            <div class="metric">
+              <div class="metric-label">CTR</div>
+              <div class="metric-value" data-counter="12.4">12.4%</div>
+              <div class="metric-change">+0.8%</div>
+            </div>
+            <div class="metric">
+              <div class="metric-label">LOAD</div>
+              <div class="metric-value" data-counter="86">86</div>
+              <div class="metric-change">+4</div>
+            </div>
+            <div class="metric">
+              <div class="metric-label">FLOW</div>
+              <div class="metric-value" data-counter="318">318</div>
+              <div class="metric-change">+12</div>
+            </div>
+          </div>
+
+          <svg class="mini-svg" viewBox="0 0 260 56" fill="none">
+            <path d="M2 42 C20 35, 30 32, 44 34 S72 40, 92 26 S130 10, 150 18 S185 36, 210 22 S236 14, 258 18" stroke="rgba(125,211,252,0.92)" stroke-width="2.1" fill="none" stroke-linecap="round"/>
+            <path d="M2 48 C24 46, 42 40, 62 38 S100 42, 126 32 S156 28, 178 34 S222 44, 258 40" stroke="rgba(83,32,214,0.70)" stroke-width="1.6" fill="none" stroke-linecap="round"/>
+          </svg>
+
+          <div class="bars">
+            <div class="bar-row"><span>CPU</span><div class="bar-track"><div class="bar-fill" style="width:78%"></div></div><span>78%</span></div>
+            <div class="bar-row"><span>RAM</span><div class="bar-track"><div class="bar-fill" style="width:61%"></div></div><span>61%</span></div>
+            <div class="bar-row"><span>I/O</span><div class="bar-track"><div class="bar-fill" style="width:49%"></div></div><span>49%</span></div>
+          </div>
+
+          <div class="pulse-line"></div>
+        </div>
+      </div>
+
+      <div class="screen screen-2">
+        <div class="screen-inner">
+          <div class="screen-title">
+            <span>Analytics / Queue B</span>
+            <span class="dot"></span>
+          </div>
+
+          <div class="metrics">
+            <div class="metric">
+              <div class="metric-label">NODES</div>
+              <div class="metric-value" data-counter="42">42</div>
+              <div class="metric-change">Stable</div>
+            </div>
+            <div class="metric">
+              <div class="metric-label">RATE</div>
+              <div class="metric-value" data-counter="7.8">7.8/s</div>
+              <div class="metric-change">+0.3</div>
+            </div>
+            <div class="metric">
+              <div class="metric-label">SYNC</div>
+              <div class="metric-value" data-counter="98">98%</div>
+              <div class="metric-change">Healthy</div>
+            </div>
+          </div>
+
+          <svg class="mini-svg" viewBox="0 0 260 56" fill="none">
+            <path d="M0 46 L22 36 L44 40 L66 18 L88 22 L110 28 L132 14 L154 20 L176 30 L198 24 L220 10 L260 16" stroke="rgba(56,189,248,0.88)" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="66" cy="18" r="2.5" fill="rgba(255,255,255,0.92)"/>
+            <circle cx="132" cy="14" r="2.5" fill="rgba(255,255,255,0.92)"/>
+            <circle cx="220" cy="10" r="2.5" fill="rgba(255,255,255,0.92)"/>
+          </svg>
+
+          <div class="ticker">
+            <span>QUEUE 12</span>
+            <span>LAT 28ms</span>
+            <span>MEM 4.2GB</span>
+            <span>ERR 0.02%</span>
+            <span>UPTIME 99.94%</span>
+            <span>QUEUE 12</span>
+            <span>LAT 28ms</span>
+            <span>MEM 4.2GB</span>
+            <span>ERR 0.02%</span>
+          </div>
+
+          <div class="pulse-line"></div>
+        </div>
+      </div>
+
+      <div class="screen screen-3">
+        <div class="screen-inner">
+          <div class="screen-title">
+            <span>Financial / Matrix C</span>
+            <span class="dot"></span>
+          </div>
+
+          <div class="metrics">
+            <div class="metric">
+              <div class="metric-label">Δ VALUE</div>
+              <div class="metric-value" data-counter="144">144</div>
+              <div class="metric-change">+11</div>
+            </div>
+            <div class="metric">
+              <div class="metric-label">INDEX</div>
+              <div class="metric-value" data-counter="512">512</div>
+              <div class="metric-change">Live</div>
+            </div>
+            <div class="metric">
+              <div class="metric-label">ALPHA</div>
+              <div class="metric-value" data-counter="8.6">8.6</div>
+              <div class="metric-change">+0.4</div>
+            </div>
+          </div>
+
+          <svg class="mini-svg" viewBox="0 0 260 56" fill="none">
+            <rect x="8" y="20" width="12" height="26" rx="3" fill="rgba(56,189,248,0.40)"/>
+            <rect x="30" y="14" width="12" height="32" rx="3" fill="rgba(56,189,248,0.55)"/>
+            <rect x="52" y="24" width="12" height="22" rx="3" fill="rgba(56,189,248,0.36)"/>
+            <rect x="74" y="10" width="12" height="36" rx="3" fill="rgba(56,189,248,0.78)"/>
+            <rect x="96" y="18" width="12" height="28" rx="3" fill="rgba(83,32,214,0.62)"/>
+            <rect x="118" y="8" width="12" height="38" rx="3" fill="rgba(56,189,248,0.92)"/>
+            <rect x="140" y="15" width="12" height="31" rx="3" fill="rgba(83,32,214,0.48)"/>
+            <rect x="162" y="21" width="12" height="25" rx="3" fill="rgba(56,189,248,0.46)"/>
+            <rect x="184" y="12" width="12" height="34" rx="3" fill="rgba(56,189,248,0.74)"/>
+            <rect x="206" y="17" width="12" height="29" rx="3" fill="rgba(83,32,214,0.64)"/>
+            <rect x="228" y="7" width="12" height="39" rx="3" fill="rgba(56,189,248,0.95)"/>
+          </svg>
+
+          <div class="bars">
+            <div class="bar-row"><span>Q1</span><div class="bar-track"><div class="bar-fill" style="width:44%"></div></div><span>44%</span></div>
+            <div class="bar-row"><span>Q2</span><div class="bar-track"><div class="bar-fill" style="width:66%"></div></div><span>66%</span></div>
+            <div class="bar-row"><span>Q3</span><div class="bar-track"><div class="bar-fill" style="width:82%"></div></div><span>82%</span></div>
+          </div>
+
+          <div class="pulse-line"></div>
+        </div>
+      </div>
+
+      <div class="screen screen-4">
+        <div class="screen-inner">
+          <div class="screen-title">
+            <span>Live Signal / Cluster D</span>
+            <span class="dot"></span>
+          </div>
+
+          <div class="metrics">
+            <div class="metric">
+              <div class="metric-label">SIGNAL</div>
+              <div class="metric-value" data-counter="24">24</div>
+              <div class="metric-change">+2</div>
+            </div>
+            <div class="metric">
+              <div class="metric-label">PEAK</div>
+              <div class="metric-value" data-counter="73">73</div>
+              <div class="metric-change">+6</div>
+            </div>
+            <div class="metric">
+              <div class="metric-label">TEMP</div>
+              <div class="metric-value" data-counter="18.7">18.7°</div>
+              <div class="metric-change">-0.2</div>
+            </div>
+          </div>
+
+          <svg class="mini-svg" viewBox="0 0 260 56" fill="none">
+            <path d="M0 30 L26 30 L34 18 L46 44 L58 12 L70 30 L90 30 L102 20 L116 38 L130 16 L144 30 L164 30 L176 23 L188 40 L202 12 L220 30 L260 30"
+              stroke="rgba(125,211,252,0.92)" stroke-width="2.1" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+
+          <div class="ticker">
+            <span>NODE A 18%</span>
+            <span>NODE B 44%</span>
+            <span>NODE C 62%</span>
+            <span>NODE D 81%</span>
+            <span>NODE E 36%</span>
+            <span>NODE A 18%</span>
+            <span>NODE B 44%</span>
+            <span>NODE C 62%</span>
+            <span>NODE D 81%</span>
+          </div>
+
+          <div class="pulse-line"></div>
+        </div>
+      </div>
+    </div>
   </div>
 
   <div class="card">
@@ -439,18 +749,11 @@
     const numbersLayer = document.getElementById("numbersLayer");
 
     const numberValues = [
-      "0","1","2","3","4","5","6","7","8","9",
-      "10","11","12","13","14","15","16","17","18","19","20",
-      "21","22","23","24","25","26","27","28","29","30",
-      "31","32","33","34","35","36","37","38","39","40",
-      "41","42","43","44","45","46","47","48","49","50",
-      "51","52","53","54","55","56","57","58","59","60",
-      "61","62","63","64","65","66","67","68","69","70",
-      "71","72","73","74","75","76","77","78","79","80",
-      "81","82","83","84","85","86","87","88","89","90",
-      "91","92","93","94","95","96","97","98","99",
-      "101","108","114","120","128","144","150","175","200",
-      "256","365","404","512","720","768","808","999","1024"
+      "0","1","2","3","4","5","6","7","8","9","10","12","14","16","18","20",
+      "22","24","26","28","30","32","36","40","42","44","48","50","52","56",
+      "60","64","66","70","72","75","80","81","84","88","90","96","99","101",
+      "108","114","120","128","144","150","175","200","256","365","404","512",
+      "720","768","808","999","1024","7.25","18.4","44.2","81.6","97.3"
     ];
 
     function createBackgroundNumber() {
@@ -458,7 +761,7 @@
       const glowChance = Math.random();
       const variantChance = Math.random();
 
-      if (glowChance > 0.965) {
+      if (glowChance > 0.985) {
         el.className = "bg-num num-star";
       } else if (variantChance > 0.7) {
         el.className = "bg-num num-strong";
@@ -471,17 +774,16 @@
       el.textContent = numberValues[Math.floor(Math.random() * numberValues.length)];
       el.style.left = Math.random() * 100 + "vw";
       el.style.top = Math.random() * 100 + "vh";
-      el.style.fontSize = (6 + Math.random() * 18) + "px";
-      el.style.transform = `rotate(${Math.random() * 28 - 14}deg)`;
+      el.style.fontSize = (6 + Math.random() * 16) + "px";
+      el.style.transform = `rotate(${Math.random() * 24 - 12}deg)`;
 
       numbersLayer.appendChild(el);
     }
 
-    for (let i = 0; i < 3400; i++) {
+    for (let i = 0; i < 3000; i++) {
       createBackgroundNumber();
     }
 
-    /* شبكة ثابتة بدون حركة */
     const canvas = document.getElementById("networkCanvas");
     const ctx = canvas.getContext("2d");
 
@@ -494,7 +796,7 @@
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
       const nodes = [];
-      const count = 26;
+      const count = 28;
 
       for (let i = 0; i < count; i++) {
         nodes.push({
@@ -509,7 +811,7 @@
 
         ctx.beginPath();
         ctx.arc(a.x, a.y, a.r, 0, Math.PI * 2);
-        ctx.fillStyle = "rgba(210, 235, 255, 0.34)";
+        ctx.fillStyle = "rgba(210, 235, 255, 0.28)";
         ctx.fill();
 
         for (let j = i + 1; j < nodes.length; j++) {
@@ -519,7 +821,7 @@
           const dist = Math.sqrt(dx * dx + dy * dy);
 
           if (dist < 160) {
-            const alpha = (1 - dist / 160) * 0.10;
+            const alpha = (1 - dist / 160) * 0.09;
             ctx.beginPath();
             ctx.moveTo(a.x, a.y);
             ctx.lineTo(b.x, b.y);
@@ -538,6 +840,47 @@
       resizeCanvas();
       drawStaticNetwork();
     });
+
+    /* تحديث بسيط لقيم الشاشات */
+    const counters = document.querySelectorAll("[data-counter]");
+
+    function nudgeValue(text) {
+      const raw = text.trim();
+
+      if (raw.endsWith("%")) {
+        const val = parseFloat(raw);
+        const next = Math.max(0, val + (Math.random() * 1.2 - 0.6));
+        return next.toFixed(1) + "%";
+      }
+
+      if (raw.endsWith("/s")) {
+        const val = parseFloat(raw);
+        const next = Math.max(0, val + (Math.random() * 0.4 - 0.2));
+        return next.toFixed(1) + "/s";
+      }
+
+      if (raw.endsWith("°")) {
+        const val = parseFloat(raw);
+        const next = val + (Math.random() * 0.4 - 0.2);
+        return next.toFixed(1) + "°";
+      }
+
+      if (raw.includes(".")) {
+        const val = parseFloat(raw);
+        const next = Math.max(0, val + (Math.random() * 0.6 - 0.3));
+        return next.toFixed(1);
+      }
+
+      const val = parseInt(raw, 10);
+      const next = Math.max(0, val + Math.floor(Math.random() * 5 - 2));
+      return String(next);
+    }
+
+    setInterval(() => {
+      counters.forEach(el => {
+        el.textContent = nudgeValue(el.textContent);
+      });
+    }, 1800);
   </script>
 
 </body>
