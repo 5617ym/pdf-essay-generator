@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+
+<html lang="ar">
+<head>
+<meta charset="UTF-8">
+<title>مولد الأسئلة المقالية من PDF</title>
+
+<style>
+body{
+font-family: Arial;
+background:#f4f6f8;
+text-align:center;
+padding:40px;
+direction:rtl
+}
+
+.container{
+background:white;
+padding:40px;
+border-radius:10px;
+max-width:600px;
+margin:auto;
+box-shadow:0 5px 15px rgba(0,0,0,0.1)
+}
+
+h1{
+color:#333
+}
+
+input{
+margin:20px 0;
+}
+
+button{
+background:#2563eb;
+color:white;
+border:none;
+padding:12px 25px;
+font-size:16px;
+border-radius:6px;
+cursor:pointer
+}
+
+button:hover{
+background:#1d4ed8
+}
+
+#result{
+margin-top:30px;
+text-align:right
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>توليد أسئلة مقالية من PDF</h1>
+
+<p>ارفع ملف PDF وسيتم إنشاء أسئلة مقالية منه</p>
+
+<input type="file" id="pdfFile" accept="application/pdf">
+
+<br>
+
+<button onclick="generateQuestions()">توليد الأسئلة</button>
+
+<div id="result"></div>
+
+</div>
+
+<script>
+
+function generateQuestions(){
+
+let result=document.getElementById("result")
+
+result.innerHTML="<p>جاري تحليل الملف...</p>"
+
+setTimeout(function(){
+
+result.innerHTML=`
+
+<h3>الأسئلة المقالية:</h3>
+
+1. اشرح الفكرة الرئيسية التي يتناولها هذا الملف.
+
+2. ما أهم المفاهيم التي ناقشها النص؟ حللها بالتفصيل.
+
+3. كيف يمكن تطبيق ما ورد في الملف في الواقع العملي؟
+
+4. ناقش التحديات التي أشار إليها النص مع اقتراح حلول.
+
+5. ما الاستنتاجات الرئيسية التي يمكن استخلاصها من هذا المحتوى؟
+
+`
+
+},1500)
+
+}
+
+</script>
+
+</body>
+</html>
