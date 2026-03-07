@@ -1,107 +1,113 @@
 <!DOCTYPE html>
-
-<html lang="ar">
+<html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<title>مولد الأسئلة المقالية من PDF</title>
+<title>Question Generator</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
 
 <style>
+
 body{
-font-family: Arial;
-background:#f4f6f8;
-text-align:center;
-padding:40px;
-direction:rtl
+font-family:'Tajawal', sans-serif;
+background:linear-gradient(135deg,#1e3c72,#2a5298);
+height:100vh;
+display:flex;
+align-items:center;
+justify-content:center;
+margin:0;
+color:white;
 }
 
 .container{
 background:white;
+color:#222;
 padding:40px;
+border-radius:20px;
+width:420px;
+box-shadow:0 20px 60px rgba(0,0,0,0.2);
+text-align:center;
+}
+
+.welcome{
+font-size:34px;
+font-weight:700;
+margin-bottom:5px;
+}
+
+.sub{
+font-size:18px;
+color:#666;
+margin-bottom:30px;
+}
+
+input, select{
+width:100%;
+padding:12px;
+margin:10px 0;
 border-radius:10px;
-max-width:600px;
-margin:auto;
-box-shadow:0 5px 15px rgba(0,0,0,0.1)
-}
-
-h1{
-color:#333
-}
-
-input{
-margin:20px 0;
+border:1px solid #ddd;
+font-size:16px;
 }
 
 button{
-background:#2563eb;
-color:white;
+width:100%;
+padding:14px;
+margin-top:20px;
 border:none;
-padding:12px 25px;
-font-size:16px;
-border-radius:6px;
-cursor:pointer
+border-radius:12px;
+background:linear-gradient(135deg,#00c6ff,#0072ff);
+color:white;
+font-size:18px;
+font-weight:bold;
+cursor:pointer;
+transition:0.3s;
 }
 
 button:hover{
-background:#1d4ed8
+transform:scale(1.03);
+box-shadow:0 10px 20px rgba(0,0,0,0.2);
 }
 
-#result{
-margin-top:30px;
-text-align:right
-}
 </style>
-
 </head>
 
 <body>
 
 <div class="container">
 
-<h1>توليد أسئلة مقالية من PDF</h1>
-
-<p>ارفع ملف PDF وسيتم إنشاء أسئلة مقالية منه</p>
-
-<input type="file" id="pdfFile" accept="application/pdf">
-
-<br>
-
-<button onclick="generateQuestions()">توليد الأسئلة</button>
-
-<div id="result"></div>
-
+<div class="welcome">
+ارحب مشعل
 </div>
 
-<script>
+<div class="sub">
+يوسف موصيني عليك و انا بخدمتك
+</div>
 
-function generateQuestions(){
+<input type="file" accept=".pdf">
 
-let result=document.getElementById("result")
+<select>
+<option>عدد الأسئلة</option>
+<option>5</option>
+<option>10</option>
+<option>15</option>
+<option>20</option>
+</select>
 
-result.innerHTML="<p>جاري تحليل الملف...</p>"
+<select>
+<option>نوع الأسئلة</option>
+<option>مقالية</option>
+<option>اختيار من متعدد</option>
+<option>مقالية + اختيار من متعدد</option>
+<option>مسائل رياضية</option>
+<option>الكل</option>
+</select>
 
-setTimeout(function(){
+<button>
+توليد الأسئلة
+</button>
 
-result.innerHTML=`
-
-<h3>الأسئلة المقالية:</h3>
-
-1. اشرح الفكرة الرئيسية التي يتناولها هذا الملف.
-
-2. ما أهم المفاهيم التي ناقشها النص؟ حللها بالتفصيل.
-
-3. كيف يمكن تطبيق ما ورد في الملف في الواقع العملي؟
-
-4. ناقش التحديات التي أشار إليها النص مع اقتراح حلول.
-
-5. ما الاستنتاجات الرئيسية التي يمكن استخلاصها من هذا المحتوى؟
-
-`
-
-},1500)
-
-}
-
-</script>
+</div>
 
 </body>
 </html>
