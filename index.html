@@ -16,13 +16,6 @@
       --bg-1:#05070b;
       --bg-2:#070b12;
       --bg-3:#0a1019;
-      --panel:rgba(9,15,24,0.34);
-      --panel-border:rgba(89,130,220,0.11);
-      --cyan:#7dd3fc;
-      --blue:#3b82f6;
-      --white:rgba(255,255,255,0.88);
-      --soft-white:rgba(255,255,255,0.42);
-      --muted:rgba(255,255,255,0.18);
     }
 
     body{
@@ -70,7 +63,7 @@
         linear-gradient(rgba(52, 87, 138, 0.06) 1px, transparent 1px),
         linear-gradient(90deg, rgba(52, 87, 138, 0.06) 1px, transparent 1px);
       background-size: 44px 44px;
-      opacity:0.14;
+      opacity:0.13;
       z-index:1;
     }
 
@@ -105,6 +98,7 @@
     .num-soft{ color:rgba(255,255,255,0.03); }
     .num-mid{ color:rgba(255,255,255,0.06); }
     .num-strong{ color:rgba(255,255,255,0.10); }
+
     .num-star{
       color:#ffffff;
       text-shadow:
@@ -129,7 +123,6 @@
       opacity:0.55;
     }
 
-    /* شاشات البيانات */
     .data-screens{
       position:absolute;
       inset:0;
@@ -138,8 +131,8 @@
 
     .screen{
       position:absolute;
-      background:var(--panel);
-      border:1px solid var(--panel-border);
+      background:rgba(9,15,24,0.34);
+      border:1px solid rgba(89,130,220,0.11);
       border-radius:18px;
       backdrop-filter:blur(8px);
       box-shadow:
@@ -315,14 +308,41 @@
       z-index:10;
       width:100%;
       max-width:560px;
-      background:rgba(6,10,16,0.92);
-      backdrop-filter:blur(14px);
-      border:1px solid rgba(255,255,255,0.05);
-      border-radius:28px;
       padding:34px 28px;
+      border-radius:32px;
+      background:
+        radial-gradient(circle at 20% 15%, rgba(125,211,252,0.05), transparent 28%),
+        radial-gradient(circle at 80% 85%, rgba(83,32,214,0.06), transparent 30%),
+        linear-gradient(180deg, rgba(7,11,18,0.58), rgba(6,10,16,0.72));
+      backdrop-filter:blur(18px);
+      -webkit-backdrop-filter:blur(18px);
+      border:1px solid rgba(255,255,255,0.008);
       box-shadow:
-        0 20px 60px rgba(0,0,0,0.28),
-        inset 0 1px 0 rgba(255,255,255,0.04);
+        0 12px 40px rgba(0,0,0,0.10),
+        0 0 70px rgba(37,99,235,0.04),
+        inset 0 1px 0 rgba(255,255,255,0.018);
+      isolation:isolate;
+    }
+
+    .card::before{
+      content:"";
+      position:absolute;
+      inset:-18px;
+      border-radius:40px;
+      background:
+        radial-gradient(circle at 50% 50%, rgba(56,189,248,0.045), transparent 55%);
+      filter:blur(24px);
+      z-index:-1;
+    }
+
+    .card::after{
+      content:"";
+      position:absolute;
+      inset:0;
+      border-radius:32px;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.018), transparent 20%, transparent 80%, rgba(255,255,255,0.01));
+      pointer-events:none;
     }
 
     .welcome{
@@ -357,31 +377,33 @@
       width:100%;
       padding:14px 16px;
       border-radius:16px;
-      border:1px solid #0b5cd6;
-      background:rgba(18,20,26,0.60);
+      border:1px solid rgba(11,92,214,0.75);
+      background:rgba(18,20,26,0.48);
       font-size:16px;
       font-family:'Tajawal',sans-serif;
       outline:none;
       transition:0.2s ease;
       color:#f5efe6;
+      backdrop-filter:blur(10px);
     }
 
     select:focus{
       border-color:#38bdf8;
-      box-shadow:0 0 0 4px rgba(56,189,248,0.12);
-      background:rgba(18,20,26,0.85);
+      box-shadow:0 0 0 4px rgba(56,189,248,0.10);
+      background:rgba(18,20,26,0.62);
     }
 
     .drop-zone{
-      border:2px dashed #0b6cf0;
+      border:2px dashed rgba(11,108,240,0.72);
       border-radius:20px;
       padding:28px 18px;
       text-align:center;
       cursor:pointer;
-      background:rgba(18,20,26,0.50);
+      background:rgba(18,20,26,0.34);
       transition:0.25s ease;
       position:relative;
       overflow:hidden;
+      backdrop-filter:blur(10px);
     }
 
     .drop-zone::before{
@@ -394,9 +416,9 @@
     }
 
     .drop-zone:hover{
-      background:rgba(21,28,42,0.78);
+      background:rgba(21,28,42,0.46);
       border-color:#2ea9ff;
-      box-shadow:0 0 25px rgba(28,105,255,0.10);
+      box-shadow:0 0 25px rgba(28,105,255,0.08);
     }
 
     .drop-zone:hover::before{
@@ -404,10 +426,10 @@
     }
 
     .drop-zone.dragover{
-      background:rgba(21,28,42,0.92);
+      background:rgba(21,28,42,0.54);
       border-color:#38bdf8;
       transform:scale(1.01);
-      box-shadow:0 0 30px rgba(56,189,248,0.15);
+      box-shadow:0 0 30px rgba(56,189,248,0.12);
     }
 
     .drop-zone p{
@@ -443,13 +465,13 @@
       cursor:pointer;
       color:#fff;
       background:linear-gradient(135deg,#18b7df 0%, #2e67f0 55%, #5320d6 100%);
-      box-shadow:0 14px 30px rgba(37,99,235,0.28);
+      box-shadow:0 14px 30px rgba(37,99,235,0.22);
       transition:transform 0.18s ease, box-shadow 0.18s ease;
     }
 
     button:hover{
       transform:translateY(-2px);
-      box-shadow:0 18px 34px rgba(37,99,235,0.32);
+      box-shadow:0 18px 34px rgba(37,99,235,0.26);
     }
 
     .note{
@@ -464,12 +486,8 @@
     }
 
     @media (max-width:900px){
-      .screen{
-        display:none;
-      }
-      .bg-num{
-        font-size:11px !important;
-      }
+      .screen{ display:none; }
+      .bg-num{ font-size:11px !important; }
     }
 
     @media (max-width:640px){
@@ -477,6 +495,7 @@
         padding:28px 18px;
         border-radius:24px;
       }
+      .card::after{ border-radius:24px; }
       .welcome{ font-size:30px; }
       .sub{ font-size:21px; }
     }
@@ -502,19 +521,19 @@
 
           <div class="metrics">
             <div class="metric">
-              <div class="metric-label">CTR</div>
-              <div class="metric-value" data-counter="12.4">12.4%</div>
-              <div class="metric-change">+0.8%</div>
+              <div class="metric-label">FLOW</div>
+              <div class="metric-value" data-counter="323">323</div>
+              <div class="metric-change">12+</div>
             </div>
             <div class="metric">
               <div class="metric-label">LOAD</div>
-              <div class="metric-value" data-counter="86">86</div>
-              <div class="metric-change">+4</div>
+              <div class="metric-value" data-counter="76">76</div>
+              <div class="metric-change">4+ 3s</div>
             </div>
             <div class="metric">
-              <div class="metric-label">FLOW</div>
-              <div class="metric-value" data-counter="318">318</div>
-              <div class="metric-change">+12</div>
+              <div class="metric-label">CTR</div>
+              <div class="metric-value" data-counter="14.1">14.1%</div>
+              <div class="metric-change">0.8%+</div>
             </div>
           </div>
 
@@ -522,12 +541,6 @@
             <path d="M2 42 C20 35, 30 32, 44 34 S72 40, 92 26 S130 10, 150 18 S185 36, 210 22 S236 14, 258 18" stroke="rgba(125,211,252,0.92)" stroke-width="2.1" fill="none" stroke-linecap="round"/>
             <path d="M2 48 C24 46, 42 40, 62 38 S100 42, 126 32 S156 28, 178 34 S222 44, 258 40" stroke="rgba(83,32,214,0.70)" stroke-width="1.6" fill="none" stroke-linecap="round"/>
           </svg>
-
-          <div class="bars">
-            <div class="bar-row"><span>CPU</span><div class="bar-track"><div class="bar-fill" style="width:78%"></div></div><span>78%</span></div>
-            <div class="bar-row"><span>RAM</span><div class="bar-track"><div class="bar-fill" style="width:61%"></div></div><span>61%</span></div>
-            <div class="bar-row"><span>I/O</span><div class="bar-track"><div class="bar-fill" style="width:49%"></div></div><span>49%</span></div>
-          </div>
 
           <div class="pulse-line"></div>
         </div>
@@ -542,19 +555,19 @@
 
           <div class="metrics">
             <div class="metric">
-              <div class="metric-label">NODES</div>
-              <div class="metric-value" data-counter="42">42</div>
-              <div class="metric-change">Stable</div>
+              <div class="metric-label">SYNC</div>
+              <div class="metric-value" data-counter="98.2">98.2%</div>
+              <div class="metric-change">Healthy</div>
             </div>
             <div class="metric">
               <div class="metric-label">RATE</div>
-              <div class="metric-value" data-counter="7.8">7.8/s</div>
-              <div class="metric-change">+0.3</div>
+              <div class="metric-value" data-counter="7.5">s/7.5</div>
+              <div class="metric-change">0.3+</div>
             </div>
             <div class="metric">
-              <div class="metric-label">SYNC</div>
-              <div class="metric-value" data-counter="98">98%</div>
-              <div class="metric-change">Healthy</div>
+              <div class="metric-label">NODES</div>
+              <div class="metric-value" data-counter="45">45</div>
+              <div class="metric-change">Stable</div>
             </div>
           </div>
 
@@ -564,18 +577,6 @@
             <circle cx="132" cy="14" r="2.5" fill="rgba(255,255,255,0.92)"/>
             <circle cx="220" cy="10" r="2.5" fill="rgba(255,255,255,0.92)"/>
           </svg>
-
-          <div class="ticker">
-            <span>QUEUE 12</span>
-            <span>LAT 28ms</span>
-            <span>MEM 4.2GB</span>
-            <span>ERR 0.02%</span>
-            <span>UPTIME 99.94%</span>
-            <span>QUEUE 12</span>
-            <span>LAT 28ms</span>
-            <span>MEM 4.2GB</span>
-            <span>ERR 0.02%</span>
-          </div>
 
           <div class="pulse-line"></div>
         </div>
@@ -590,19 +591,19 @@
 
           <div class="metrics">
             <div class="metric">
-              <div class="metric-label">Δ VALUE</div>
-              <div class="metric-value" data-counter="144">144</div>
-              <div class="metric-change">+11</div>
+              <div class="metric-label">ALPHA</div>
+              <div class="metric-value" data-counter="8.5">8.5</div>
+              <div class="metric-change">0.4+</div>
             </div>
             <div class="metric">
               <div class="metric-label">INDEX</div>
-              <div class="metric-value" data-counter="512">512</div>
+              <div class="metric-value" data-counter="513">513</div>
               <div class="metric-change">Live</div>
             </div>
             <div class="metric">
-              <div class="metric-label">ALPHA</div>
-              <div class="metric-value" data-counter="8.6">8.6</div>
-              <div class="metric-change">+0.4</div>
+              <div class="metric-label">Δ VALUE</div>
+              <div class="metric-value" data-counter="148">148</div>
+              <div class="metric-change">11+</div>
             </div>
           </div>
 
@@ -620,12 +621,6 @@
             <rect x="228" y="7" width="12" height="39" rx="3" fill="rgba(56,189,248,0.95)"/>
           </svg>
 
-          <div class="bars">
-            <div class="bar-row"><span>Q1</span><div class="bar-track"><div class="bar-fill" style="width:44%"></div></div><span>44%</span></div>
-            <div class="bar-row"><span>Q2</span><div class="bar-track"><div class="bar-fill" style="width:66%"></div></div><span>66%</span></div>
-            <div class="bar-row"><span>Q3</span><div class="bar-track"><div class="bar-fill" style="width:82%"></div></div><span>82%</span></div>
-          </div>
-
           <div class="pulse-line"></div>
         </div>
       </div>
@@ -639,19 +634,19 @@
 
           <div class="metrics">
             <div class="metric">
-              <div class="metric-label">SIGNAL</div>
-              <div class="metric-value" data-counter="24">24</div>
-              <div class="metric-change">+2</div>
+              <div class="metric-label">TEMP</div>
+              <div class="metric-value" data-counter="18.2">18.2°</div>
+              <div class="metric-change">0.2-</div>
             </div>
             <div class="metric">
               <div class="metric-label">PEAK</div>
-              <div class="metric-value" data-counter="73">73</div>
-              <div class="metric-change">+6</div>
+              <div class="metric-value" data-counter="71">71</div>
+              <div class="metric-change">6+</div>
             </div>
             <div class="metric">
-              <div class="metric-label">TEMP</div>
-              <div class="metric-value" data-counter="18.7">18.7°</div>
-              <div class="metric-change">-0.2</div>
+              <div class="metric-label">SIGNAL</div>
+              <div class="metric-value" data-counter="28">28</div>
+              <div class="metric-change">2+</div>
             </div>
           </div>
 
@@ -659,18 +654,6 @@
             <path d="M0 30 L26 30 L34 18 L46 44 L58 12 L70 30 L90 30 L102 20 L116 38 L130 16 L144 30 L164 30 L176 23 L188 40 L202 12 L220 30 L260 30"
               stroke="rgba(125,211,252,0.92)" stroke-width="2.1" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
-
-          <div class="ticker">
-            <span>NODE A 18%</span>
-            <span>NODE B 44%</span>
-            <span>NODE C 62%</span>
-            <span>NODE D 81%</span>
-            <span>NODE E 36%</span>
-            <span>NODE A 18%</span>
-            <span>NODE B 44%</span>
-            <span>NODE C 62%</span>
-            <span>NODE D 81%</span>
-          </div>
 
           <div class="pulse-line"></div>
         </div>
@@ -841,7 +824,6 @@
       drawStaticNetwork();
     });
 
-    /* تحديث بسيط لقيم الشاشات */
     const counters = document.querySelectorAll("[data-counter]");
 
     function nudgeValue(text) {
